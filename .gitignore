@@ -1,0 +1,25 @@
+﻿################################################################################
+# 這個 .gitignore 檔案由 Microsoft(R) Visual Studio 自動建立。
+################################################################################
+
+/scss
+/prepros.config
+/.vs/GIT/v16
+/.vs/GIT/config
+/.vs/ProjectSettings.json
+/.vs/tasks.vs.json
+/.vs/slnx.sqlite
+/memberCenter copy.aspx
+/Html/prepros.config
+/css/vendors/bootstrap/bootstrap.css
+/css/vendors/bootstrap/bootstrap-reboot.css
+/css/vendors/bootstrap/bootstrap-grid.css
+/.vs/OCW_JP0520/v15/Server/sqlite3
+/index - 複製.aspx
+/Activity/event/pp-1/index-jp - 複製.html
+/css/pages/lobby - 0624.css
+/.vs/config
+/.vs/VSWorkspaceState.json
+/.vs/config/applicationhost.config
+/.vs
+*.config
