@@ -1603,53 +1603,64 @@
                 <h1 class="header-logo" onclick="API_LoadPage('Home','Home.aspx')">
                     <img src="images/assets/logo_maharaja.svg" alt="BET파라다이스">
                 </h1>
-                <div class="header-tool">
-                    <div id="idMenuLogin" class="header-tool-item user is-hide">     
-                        <div class="balance-container">
-                            <div class="balance-inner">
-                                <div class="game-coin">  
-                                    <!-- 未完成存款訂單小紅點 -->
-                                    <%-- <span class="notify"><span class="notify-dot"></span></span>        --%>                              
-                                    <img src="images/assets/coin-Ocoin.png" alt="">
-                                </div>
-								<div class="currency-info">
-                                    <div class="currencyType">KRW</div>
-                                </div>
-                                <div class="balance-info">
-                                    <div class="amount">0</div>
-                                </div>
-                                <button class="btn btn-deposit" onclick="API_LoadPage('Deposit','Deposit.aspx', true)" style="display: none;">
-                                    <span class="icon-add"></span>
-                                </button>
-                            </div>
-                        </div>                   
-                       
-                        <a class="item-tab MemberCenterBtn" onclick="API_LoadPage('MemberCenter', 'MemberCenter.aspx', true)">
-                            <div class="avatar">
-                                <img id="idAvatarImg" src="images/assets/avatar/avatar-05.jpg">
-                            </div>
-                        </a>
+                <div class="header_setting_content">
+                     <!-- Search -->
+                     <div class="navbar-search nav-item" style="display: none;">
+                        <span class="search-bar desktop" data-toggle="modal" data-target="#alertSearch">
+                            <span class="btn btn-search">
+                                <i class="icon icon-mask icon-search"></i>
+                            </span>
+                            <span class="text language_replace">遊戲搜尋</span>
+                        </span>
                     </div>
-                    <div id="idLoginBtn" class="header-tool-item">
-                        <a class="item-tab" onclick="onBtnLoginShow()">
-                            <i class="icon-user-circle"></i>
-                            <span class="language_replace">登入</span>
-                        </a>
-                    </div>
-                    <div class="header-tool-item">
-                        <a class="item-tab" data-btn-click="openLag">
-                            <i class="icon-world"></i>
-                            <span id="idLangText">繁體中文</span>
-                        </a>
-                        <div class="lang-select-panel">
-                            <ul>
-                                <!-- <li><a onclick="switchLang('KOR', true)">한국어</a></li> -->
-                                <li><a onclick="switchLang('JPN', true)">日本語</a></li>
-                                <li><a onclick="switchLang('ENG', true)">EN</a></li>
-                                <li><a onclick="switchLang('CHT', true)">繁體中文</a></li>
-                                <!-- <li><a onclick="switchLang('CHS', true)">簡體中文</a></li>
-								<li><a onclick="switchLang('VIET', true)">Tiếng Việt</a></li> -->
-                            </ul>
+                    <div class="header-tool">
+                        <div id="idMenuLogin" class="header-tool-item user is-hide">     
+                            <div class="balance-container">
+                                <div class="balance-inner">
+                                    <div class="game-coin">  
+                                        <!-- 未完成存款訂單小紅點 -->
+                                        <%-- <span class="notify"><span class="notify-dot"></span></span>        --%>                              
+                                        <img src="images/assets/coin-Ocoin.png" alt="">
+                                    </div>
+                                    <div class="currency-info">
+                                        <div class="currencyType">KRW</div>
+                                    </div>
+                                    <div class="balance-info">
+                                        <div class="amount">0</div>
+                                    </div>
+                                    <button class="btn btn-deposit" onclick="API_LoadPage('Deposit','Deposit.aspx', true)" style="display: none;">
+                                        <span class="icon-add"></span>
+                                    </button>
+                                </div>
+                            </div>                   
+                           
+                            <a class="item-tab MemberCenterBtn" onclick="API_LoadPage('MemberCenter', 'MemberCenter.aspx', true)">
+                                <div class="avatar">
+                                    <img id="idAvatarImg" src="images/assets/avatar/avatar-05.jpg">
+                                </div>
+                            </a>
+                        </div>
+                        <div id="idLoginBtn" class="header-tool-item">
+                            <a class="item-tab" onclick="onBtnLoginShow()">
+                                <i class="icon-user-circle"></i>
+                                <span class="language_replace">登入</span>
+                            </a>
+                        </div>
+                        <div class="header-tool-item">
+                            <a class="item-tab" data-btn-click="openLag">
+                                <i class="icon-world"></i>
+                                <span id="idLangText">繁體中文</span>
+                            </a>
+                            <div class="lang-select-panel">
+                                <ul>
+                                    <!-- <li><a onclick="switchLang('KOR', true)">한국어</a></li> -->
+                                    <li><a onclick="switchLang('JPN', true)">日本語</a></li>
+                                    <li><a onclick="switchLang('ENG', true)">EN</a></li>
+                                    <li><a onclick="switchLang('CHT', true)">繁體中文</a></li>
+                                    <!-- <li><a onclick="switchLang('CHS', true)">簡體中文</a></li>
+                                    <li><a onclick="switchLang('VIET', true)">Tiếng Việt</a></li> -->
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1986,8 +1997,462 @@
             </div>
         </div>
     </div>
+   
+    <!-- Modal Search 品牌-LOGO版-->
+    <div class="modal fade no-footer alertSearchTemp show" id="alertSearch" tabindex="-1" style="display: ;"
+        aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-header-container">
+                        <!-- <h5 class="modal-title">我是logo</h5> -->
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            id="alertSearchCloseButton">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="searchFilter-wrapper">
+                        <div class="modal-header-container">
+                            <div class="searchFilter-item input-group game-brand">
+                                <div class="input-fake-select">
+                                    <div class="gameName">
+                                        <span class="language_replace" langkey="遊戲品牌">遊戲品牌</span>
+                                        (<span class="brandSeleCount language_replace" langkey="全部"> 1 / 21 </span>)
+                                    </div>
+                                    <div class="has-arrow"><i class="arrow"></i></div>
+                                </div>
+                            </div>
+                            <div class="searchFilter-item input-group game-type" id="div_SearchGameCategory">
+                                <select class="custom-select" id="seleGameCategory">
+                                    <option value="All">全部</option>
+                                    <option value="Live">Live</option>
+                                </select>
+                            </div>
+                            <div class="searchFilter-item input-group keyword">
+                                <input id="alertSearchKeyWord" type="text" class="form-control"
+                                    language_replace="placeholder" placeholder="キーワード" enterkeyhint="" langkey="キーワード">
+                                <label for="" class="form-label"><span class="language_replace"
+                                        langkey="キーワード">キーワード</span></label>
+                            </div>
+                            <div class="wrapper_center action-outter">
+                                <button type="button" class="btn btn btn-outline-main btn-sm btn-reset-popup"
+                                    onclick="SearchControll.searchGameChangeClear()">
+                                    <span class="language_replace" langkey="重新設定">重新設定</span>
+                                </button>
+                                <button onclick="SearchControll.searchGameList()" type="button"
+                                    class="btn btn-full-main btn-sm btn-search-popup">
+                                    <span class="language_replace" langkey="検索">検索</span>
+                                </button>
+                            </div>
+                        </div>
 
-    <!--alert-->
+                        <!-- 品牌LOGO版 Collapse -->
+                        <div class="brand-wrapper" style="display: none;">
+                            <div class="modal-header-container">
+                                <div class="brand-inner">
+                                    <ul class="brand-popup-list" id="ulSearchGameBrand">
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_EWin"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg"
+                                                                src="images/logo/default/logo-eWIN.svg" alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_EVO"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-EVO.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_PP"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-PP.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_YS"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-YS.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_BNG"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-BNG.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_HB"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-HB.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_BTI"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-BTI.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_VA"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-VA.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_KGS"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-KGS.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_PG"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-PG.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_KX"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-KX.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_GMW"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-GMW.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_ZEUS"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg"
+                                                                src="images/logo/default/logo-ZEUS.png" alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_BG"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-BG.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_BBIN"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg"
+                                                                src="images/logo/default/logo-BBIN.png" alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_RT"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-RT.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_MG"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-MG.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_NE"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-NE.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_CQ9"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-CQ9.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_CG"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-CG.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                        <li class="brand-item custom-control custom-checkboxValue-noCheck">
+                                            <label class="custom-label">
+                                                <input type="checkbox" name="button-brandExchange" id="searchIcon_PNG"
+                                                    class="custom-control-input-hidden searchGameBrandcheckbox"
+                                                    onchange="SearchControll.searchGameChange()">
+                                                <div class="custom-input checkbox">
+                                                    <span class="logo-wrap">
+                                                        <span class="img-wrap">
+                                                            <img class="brandImg" src="images/logo/default/logo-PNG.png"
+                                                                alt=""></span>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <div class="wrapper_center">
+
+                                        <button class="btn btn-full-main btn-brand-confirm" type="button"
+                                            onclick="SearchControll.searchGameChangeConfirm()">
+                                            <span class="language_replace" langkey="確認">確認</span>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mask-header"></div>
+                <div class="modal-body">
+                    <div class="game-search-wrapper">
+                        <div class="search-result-wrapper">
+                            <div class="search-result-inner">
+                                <div class="search-result-list">
+                                    <div class="game-item-group list-row row" id="alertSearchContent">
+                                        <div class="game-item col-auto group0">
+                                            <div class="game-item-inner">
+                                                <div class="game-item-img">
+                                                    <span class="game-item-link"></span>
+                                                    <div class="img-wrap">
+                                                        <img class="gameimg"
+                                                            src="https://ewin.dev.mts.idv.tw/Files/GamePlatformPic/EWin/PC/CHT/EWinGaming.png"
+                                                            data-loaded="true">
+                                                    </div>
+                                                </div>
+                                                <div class="game-item-info">
+                                                    <div class="game-item-info-inner">
+                                                        <div class="game-item-info-brief">
+                                                            <div class="game-item-info-pre">
+                                                                <h3 class="gameName">真人百家樂(eWIN)</h3>
+                                                            </div>
+                                                            <div class="game-item-info-moreInfo">
+                                                                <ul class="moreInfo-item-wrapper">
+                                                                    <li class="moreInfo-item brand">
+                                                                        <h4 class="value BrandName">EWin</h4>
+                                                                    </li>
+                                                                    <li class="moreInfo-item category">
+                                                                        <h4 class="value GameCategoryCode">Live</h4>
+                                                                    </li>
+                                                                    <li class="moreInfo-item RTP">
+                                                                        <span class="title">RTP</span>
+                                                                        <span class="value number valueRTP">--</span>
+                                                                    </li>
+                                                                    <li class="moreInfo-item">
+                                                                        <span class="title">NO</span>
+                                                                        <span class="value number valueID">0</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="game-item-info-indicator">
+                                                            <div class="action">
+                                                                <div class="btn-s-wrapper">
+                                                                    <!-- 按讚 按鈕移除 -->
+                                                                    <button type="button"
+                                                                        class="btn-thumbUp btn btn-round"
+                                                                        style="display: none;">
+                                                                        <i class="icon icon-m-thumup"></i>
+                                                                    </button>
+
+                                                                    <button type="button"
+                                                                        class="btn-like btn btn-round desktop">
+                                                                        <i class="icon icon-m-favorite"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <!-- play 按鈕移除 -->
+                                                                <button type="button" class="btn btn-play"
+                                                                    style="display: none;">
+                                                                    <span class="language_replace title"
+                                                                        langkey="プレイ">プレイ</span><i class="triangle"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 品牌LOGO版 Collapse TEST-->
+    <script>
+        $('.brand-wrapper:not(.show)').hide();
+        $('.input-fake-select').click(function () {
+            $(this).toggleClass('show');
+            $(this).parents('.searchFilter-wrapper').find('.brand-wrapper').slideToggle();
+            $('.mask-header').toggleClass('show');
+        });
+    </script>
 
      <!--alert-->
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alertContact" aria-hidden="true" id="alertContact">
