@@ -1069,7 +1069,7 @@
                         });
                     } else {
                         EWinWebInfo.UserLogined = false;
-                        showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請重新登入"), function () {
+                        showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請重新登入") + ":" + mlp.getLanguageKey(obj.Message), function () {
                             API_Logout();
                         });
 
@@ -2012,14 +2012,14 @@
         </script>
 
         <!-- 主選單 -->
-        <div class="nav">           
+        <div class="nav">
+            <div class="search-bar mobile" data-toggle="modal" data-target="#alertSearch">
+                <span class="text language_replace">遊戲搜尋</span>
+                <span class="btn btn-search">
+                    <i class="icon icon-mask icon-search"></i>
+                </span>
+            </div>
             <nav class="nav-drawer">
-                <div class="search-bar mobile" data-toggle="modal" data-target="#alertSearch">
-                    <span class="text language_replace">遊戲搜尋</span>
-                    <span class="btn btn-search">
-                        <i class="icon icon-mask icon-search"></i>
-                    </span>
-                </div>
                 <div class="nav-drawer-inner">
                     <ul class="nav-group">
                         <li>
@@ -2109,7 +2109,7 @@
                     </ul>
 
                     <ul class="nav-group is-hide" id="navWalletGroup">
-                    <%--    <li class="is-hide navDeposit">
+                        <li class="is-hide navDeposit">
                             <a onclick="API_LoadPage('Deposit','Deposit.aspx', true)">
                                 <i class="icon-deposit"></i>
                                 <span class="language_replace">存款</span>
@@ -2121,13 +2121,18 @@
                                 <span class="language_replace">出款</span>
                             </a>
                         </li>
-             
+                        <%--<li>
+                            <a onclick="API_LoadPage('Withdraw','Withdraw.aspx', true)">
+                                <i class="icon-deposit"></i>
+                                <span class="language_replace">出款</span>
+                            </a>
+                        </li>--%>
                          <li>
                             <a onclick="API_LoadPage('WalletCenter','WalletCenter.aspx', true)">
                                 <i class="icon-wallet"></i>
                                 <span class="language_replace">錢包中心</span>
                             </a>
-                        </li>--%>
+                        </li>
                         <!--li style="">
                             <a onclick="API_LoadPage('QA','/Article/guide_Q&A_jp.html')">
                                 <i class="icon-service"></i>
@@ -2590,68 +2595,29 @@
             </div>
         </div>
     </div>
-
-    <div id="tmpSearchGameBrand" style="display: none">
-        <li class="brand-item custom-control custom-checkboxValue-noCheck">
-            <label class="custom-label">
-                <input type="checkbox" name="button-brandExchange" id="" class="custom-control-input-hidden searchGameBrandcheckbox" onchange="SearchControll.searchGameChange()">
-                <div class="custom-input checkbox">
-                    <span class="logo-wrap">
-                        <span class="img-wrap">
-                            <img class="brandImg" src="images/logo/default/logo-eWIN.svg" alt=""></span>
-                    </span>
-                </div>
-            </label>
-        </li>
-    </div>
-
-    <div id="tmpSearchGameItem" class="is-hide">
-        <div class="game-item col-auto">
-            <div class="game-item-inner">
-                <div class="game-item-img">
-                    <span class="game-item-link"></span>
-                    <div class="img-wrap">
-                        <img class="gameimg" src="">
+	<!-- Toaster 1014新增 -->
+    <!-- <div class="ToasterMain">
+        <div id="ToasterDiv" class="ToasterDiv">
+        </div>
+        <div id="templateToast" style="display: none">
+            <!-- Item 物件持續15秒 請在15秒後刪除 -->
+            <!-- <div class="ToastAin fadeInAni">
+                <div class="ToastItem">
+                    <div>
+                        <div><span class="ToastItemTime">12:00</span></div>
                     </div>
-                </div>
-                <div class="game-item-info">
-                    <div class="game-item-info-inner">
-                        <div class="game-item-info-brief">
-                            <div class="game-item-info-pre">
-                                <h3 class="gameName"></h3>
-                            </div>
-                            <div class="game-item-info-moreInfo">
-                                <ul class="moreInfo-item-wrapper">
-                                    <li class="moreInfo-item brand">
-                                        <h4 class="value BrandName"></h4>
-                                    </li>
-                                    <li class="moreInfo-item category">
-                                        <h4 class="value GameCategoryCode"></h4>
-                                    </li>
-                                    <li class="moreInfo-item RTP">
-                                        <span class="title">RTP</span>
-                                        <span class="value number valueRTP"></span>
-                                    </li>
-                                    <li class="moreInfo-item">
-                                        <span class="title">NO</span>
-                                        <span class="value number valueID"></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="game-item-info-indicator">
-                            <div class="action">
-                                <div class="btn-s-wrapper">
-                                    <button type="button" class="btn-like btn btn-round">
-                                          <i class="icon icon-casinoworld-heart-o"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="ToastItemCon">
+                        <div><span class="ToastName">User000**1</span></div>
+                        <div class="ToastText"><span class="language_replace">出金</span></div>
+                        <div><span class="ToastAmount">120,000,000</span></div>
                     </div>
+                    <div class="ToastItemCloseBtn"><span></span></div>
                 </div>
-            </div>
+            </div> -->
+            <!-- Item End -->
+
         </div>
     </div>
+	<!-- -->
 </body>
 </html>
