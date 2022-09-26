@@ -1581,7 +1581,6 @@
     window.onload = init;
 </script>
 
-	
 <body>
     <div class="loader-container" style="display: none">
         <div class="loader-box">
@@ -1598,10 +1597,11 @@
         <div class="nav-toggle">
             <div></div>
         </div>
+      
         <header class="header-container">
             <div class="header-inner ">
                 <h1 class="header-logo" onclick="API_LoadPage('Home','Home.aspx')">
-                    <img src="images/assets/logo_maharaja.svg" alt="BET파라다이스">
+                    <img src="images/assets/logo_maharaja.svg" alt="maharaja">
                 </h1>
                 <div class="header_setting_content">
                      <!-- Search -->
@@ -1668,7 +1668,7 @@
 
             <div class="header-inner GameHeader is-hide">
                 <h1 class="header-logo" onclick="API_LoadPage('Home','Home.aspx')">
-                    <img src="images/assets/logo_maharaja.svg" alt="BET파라다이스">
+                    <img src="images/assets/logo_maharaja.svg" alt="maharaja">
                 </h1>
                 <div class="header-gameName">
                     <div class="logo">
@@ -1705,6 +1705,12 @@
 
         <!-- 主選單 -->
         <div class="nav">
+            <div class="search-bar mobile" data-toggle="modal" data-target="#alertSearch">
+                <span class="text language_replace">遊戲搜尋</span>
+                <span class="btn btn-search">
+                    <i class="icon icon-mask icon-search"></i>
+                </span>
+            </div>
             <nav class="nav-drawer">
                 <div class="nav-drawer-inner">
                     <ul class="nav-group">
@@ -2769,12 +2775,13 @@
         </div>
     </div>
 	<!-- Toaster 1014新增 -->
-    <!-- <div class="ToasterMain">
+    <%--  
+    <div class="ToasterMain">
         <div id="ToasterDiv" class="ToasterDiv">
         </div>
         <div id="templateToast" style="display: none">
             <!-- Item 物件持續15秒 請在15秒後刪除 -->
-            <!-- <div class="ToastAin fadeInAni">
+            <div class="ToastAin fadeInAni">
                 <div class="ToastItem">
                     <div>
                         <div><span class="ToastItemTime">12:00</span></div>
@@ -2786,11 +2793,11 @@
                     </div>
                     <div class="ToastItemCloseBtn"><span></span></div>
                 </div>
-            </div> -->
+            </div> 
             <!-- Item End -->
-
         </div>
     </div>
+    --%>
 	<!-- -->
 </body>
 </html>

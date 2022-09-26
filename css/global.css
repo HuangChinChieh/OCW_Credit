@@ -1168,6 +1168,7 @@ select.custom-style:focus {
   border: solid 1px #b0b0b0;
 }
 
+
 .search-bar.desktop .text {
   color: rgba(0, 0, 0, 0.6)
 }
@@ -1201,6 +1202,26 @@ select.custom-style:focus {
 
 .search-bar.desktop .btn-search .icon:before {
   background-color: #474646;
+}
+
+.search-bar.mobile {
+  background-color: #fff;
+  border-radius: 50px;
+  position: absolute;
+  width: calc(100% - 65px);
+  right: 10px;
+  top: 12px;
+  padding: 0px 10px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  z-index: 3;
 }
 
 @media (min-width: 768px){
