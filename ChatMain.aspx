@@ -6,12 +6,7 @@
 
     string sid = Request["SID"];
     string ewinsid = string.Empty;
-    RedisCache.SessionContext.SIDInfo SI;
-    SI = RedisCache.SessionContext.GetSIDInfo(sid);
-    if (SI != null && !string.IsNullOrEmpty(SI.EWinSID)) {
-        ewinsid = SI.EWinSID;
-    }
-
+    ewinsid = sid;
     string Version=EWinWeb.Version;
     %>
 <!doctype html>

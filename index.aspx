@@ -4,7 +4,7 @@
     if (EWinWeb.IsInMaintain()) {
         Response.Redirect("/Maintain.aspx");
     }
-    string PersonCode=EWinWeb.MainPersonCode;
+
     string Token;
     int RValue;
     Random R = new Random();
@@ -131,14 +131,14 @@
 </head>
 <% if (EWinWeb.IsTestSite == false) { %>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WRNSR38PQ7"></script>
+<%--<script async src="https://www.googletagmanager.com/gtag/js?id=G-WRNSR38PQ7"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-097DC2GB6H');
-</script>
+</script>--%>
 <% } %>
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script src="Scripts/OutSrc/lib/jquery/jquery.min.js"></script>
@@ -193,74 +193,13 @@
     var selectedCurrency = '';
     var GameInfoModal;
     var v ="<%:Version%>";
-    var PersonCode = "<%:PersonCode%>";
     var ParentPersonCode = "";
     var test = "";
 
     var LobbyGameList;
 	
 	var ID = 0;
-	
-    //出款POPUP
-    function queryInfoData() {
 
-        c.callService("/GetInfoData.aspx?ID=" + ID, null, function (success, resp) {
-            if (success) {
-                if ((resp != null) && (resp != "")) {
-                    var o = null;
-
-                    try { o = JSON.parse(resp); }
-                    catch (ex) { }
-
-                    if (o != null) {
-                        for (var i = 0; i < o.length; i++) {
-                            if (o[i].InfoID > 0) {
-                                var t = c.getTemplate("templateToast");
-                                var guid = Math.uuid();
-
-                                t.id = guid;
-                                c.setClassText(t, "ToastItemTime", null, o[i].InfoDate);
-                                c.setClassText(t, "ToastName", null, o[i].InfoAccount);
-                                c.setClassText(t, "ToastAmount", null, c.toCurrency(o[i].InfoAmount));
-                                t.classList.add("toast");
-                                t.getElementsByClassName("ToastItemCloseBtn")[0].setAttribute("guid", guid);
-                                t.getElementsByClassName("ToastItemCloseBtn")[0].onclick = function () {
-                                    var toast = document.getElementById(this.getAttribute("guid"));
-                                    toast.parentNode.removeChild(toast);
-                                }
-                                document.getElementById("ToasterDiv").appendChild(t);
-
-                                if (ID == 0) {
-                                    ID = o[i].InfoID;
-                                }
-
-                                if (o[i].InfoID > ID) {
-                                    ID = o[i].InfoID;
-                                }
-
-                                window.setTimeout(function () {
-                                    for (var i = 0; i < document.getElementsByClassName("toast").length; i++) {
-                                        if (document.getElementsByClassName("toast")[i].style.opacity == 0) {
-                                            var toast = document.getElementsByClassName("toast")[i];
-                                            toast.parentNode.removeChild(toast);
-                                        }
-                                    }
-
-                                }, 15000)
-                            }
-                            else {
-                                if (o[0].InfoID == 0) {
-                                    ID = 0;
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-        });
-    }
-	
 
     //#region TOP API
 
@@ -1255,19 +1194,6 @@
                 lobbyClient = new LobbyAPI("/API/LobbyAPI.asmx");
                 paymentClient = new PaymentAPI("/API/PaymentAPI.asmx");
 
-                lobbyClient.GetParentPersonCode(EWinWebInfo.SID, Math.uuid(), function (success, o) {
-                    if (success) {
-                        if (o.ResultState == 0) {
-                            ParentPersonCode = o.Message;
-                            if (ParentPersonCode == PersonCode) {
-                                $('.navDeposit').removeClass('is-hide');
-                            } else {
-
-                            }
-                        }
-                    }
-                });
-
                 if (dstPage) {
                     var loadPage;
                     switch (dstPage.toUpperCase()) {
@@ -1292,7 +1218,7 @@
                     API_Home();
                 }
 
-                getCompanyGameCode();
+                //getCompanyGameCode();
 
                 //登入Check
                 window.setTimeout(function () {
@@ -1385,10 +1311,7 @@
         //document.getElementById("IFramePage").onload = loadingEnd;
 
         GameInfoModal = new bootstrap.Modal(document.getElementById("alertGameIntro"));
-		
-		//出款POPUP
-		queryInfoData();
-        setInterval(queryInfoData, 20000);
+
     }
 
     function getCompanyGameCode(cb) {
@@ -2638,29 +2561,5 @@
             </div>
         </div>
     </div>
-	<!-- Toaster 1014新增 -->
-    <!-- <div class="ToasterMain">
-        <div id="ToasterDiv" class="ToasterDiv">
-        </div>
-        <div id="templateToast" style="display: none">
-            <!-- Item 物件持續15秒 請在15秒後刪除 -->
-            <!-- <div class="ToastAin fadeInAni">
-                <div class="ToastItem">
-                    <div>
-                        <div><span class="ToastItemTime">12:00</span></div>
-                    </div>
-                    <div class="ToastItemCon">
-                        <div><span class="ToastName">User000**1</span></div>
-                        <div class="ToastText"><span class="language_replace">出金</span></div>
-                        <div><span class="ToastAmount">120,000,000</span></div>
-                    </div>
-                    <div class="ToastItemCloseBtn"><span></span></div>
-                </div>
-            </div> -->
-            <!-- Item End -->
-
-        </div>
-    </div>
-	<!-- -->
 </body>
 </html>
