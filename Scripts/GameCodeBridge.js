@@ -121,7 +121,7 @@
      * @param {string} GameCode    遊戲代碼
      * @param {Function} cb 找到資料時的cb, param => data, null時為無資料
      */
-    this.GetByGameCode2 = function (GameCode, cb) {
+    this.GetByGameCode = function (GameCode, cb) {
         var queue = (IndexedDB) => {
             var transaction = IndexedDB.transaction(['GameCodes'], 'readonly');
             var objectStore = transaction.objectStore('GameCodes');
@@ -140,96 +140,6 @@
         };
 
         GCBSelf.InitPromise.then(getDB).then(queue);
-        //if (GCBSelf.IsFirstLoaded) {
-        //    event();
-        //} else {
-
-        //}
-    };
-
-    this.GetByGameCode = function (GameCode, cb) {
-        //test
-        if (GCBSelf.IsFirstLoaded) {
-            try {
-                var queue = (IndexedDB) => {
-                    var transaction = IndexedDB.transaction(['GameCodes'], 'readonly');
-                    var objectStore = transaction.objectStore('GameCodes');
-
-                    objectStore.get(GameCode).onsuccess = function (event) {
-                        if (cb) {
-                            if (event.target.result) {
-                                cb(event.target.result);
-                            } else {
-                                cb(null);
-                            }
-                        }
-
-                        IndexedDB.close();
-                    };
-                };
-
-                GCBSelf.InitPromise.then(getDB).then(queue);
-            }
-            catch (e) {
-                GCBSelf.GetCompanyGameCode(Math.uuid(), GameCode, function (success, o) {
-                    if (success) {
-                        if (o.Result == 0) {
-                            let data = o.Data;
-                            data.ChampionType = 0;
-                            data.FavoTimeStamp = null;
-                            data.PlayedTimeStamp = null;
-                            if (data.Language != "null") {
-                                data.Language = JSON.parse(data.Language);
-                            } else {
-                                data.Language = [];
-                            }
-
-                            if (data.Tags != "null") {
-                                data.Tags = JSON.parse(data.Language);
-                            } else {
-                                data.Tags = [];
-                            }
-
-                            cb(data);
-                        } else {
-                            cb(null);
-                        }
-                    } else {
-                        cb(null);
-                    }
-                });
-            }
-      
-        } else {
-            GCBSelf.GetCompanyGameCode(Math.uuid(), GameCode, function (success, o) {
-                if (success) {
-                    if (o.Result == 0) {
-                        let data = o.Data;
-                        data.ChampionType = 0;
-                        data.FavoTimeStamp = null;
-                        data.PlayedTimeStamp = null;
-                        if (data.Language != "null") {
-                            data.Language = JSON.parse(data.Language);
-                        } else {
-                            data.Language = [];
-                        }
-
-                        if (data.Tags != "null") {
-                            data.Tags = JSON.parse(data.Language);
-                        } else {
-                            data.Tags = [];
-                        }
-
-                        cb(data);
-                    } else {
-                        cb(null);
-                    }
-                } else {
-                    cb(null);
-                }
-            });
-        }
-
         //if (GCBSelf.IsFirstLoaded) {
         //    event();
         //} else {

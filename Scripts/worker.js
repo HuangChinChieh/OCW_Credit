@@ -123,7 +123,6 @@ var worker = function (WebUrl, Second, eWinGameItem, Version) {
         categoryStore = db.createObjectStore("GameCategory", { keyPath: ['GameBrand', 'GameCategoryCode'], autoIncrement: false });
         categoryStore.createIndex('GameBrand', 'GameBrand', { unique: false, multiEntry: false });
         categoryStore.createIndex('GameCategoryCode', 'GameCategoryCode', { unique: false, multiEntry: false });
-
         syncStore = db.createObjectStore("SyncData", { keyPath: 'SyncID', autoIncrement: false });
 
         //store.createIndex('ShowTags', 'ShowTags', { unique: false, multiEntry: true }); //顯性標籤
@@ -486,7 +485,8 @@ var worker = function (WebUrl, Second, eWinGameItem, Version) {
                                         objectStore.put(InsertData);
                                         objectCategoryStore.put({
                                             GameBrand: InsertData.GameBrand,
-                                            GameCategoryCode: InsertData.GameCategoryCode
+                                            GameCategoryCode: InsertData.GameCategoryCode,
+                                            GameCategorySubCode: InsertData.GameCategorySubCode
                                         });
 
                                         workerSelf.SyncEventData.NowGameID = gameCodeItem.GameID;

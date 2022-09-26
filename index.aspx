@@ -168,6 +168,7 @@
     var GCB;
     var SearchControll;
     var lastWalletList = null; // 記錄最後一次同步的錢包, 用來分析是否錢包有變動    
+    var CompanyGameCategoryCodes = ["All"];
     var EWinWebInfo = {
         EWinUrl: "<%=EWinWeb.EWinUrl %>",
         EWinGameUrl: "<%=EWinWeb.EWinGameUrl %>",
@@ -906,6 +907,16 @@
         }
     };
 
+    function getCompanyGameCategoryCode() {
+        GCB.GetGameCategoryCode((categoryCodeItem) => {
+            if (CompanyGameCategoryCodes.indexOf(categoryCodeItem.GameCategoryCode) < 0) {
+                CompanyGameCategoryCodes.push(categoryCodeItem.GameCategoryCode);
+            }
+        }, () => {
+            //console.log("done");
+        })
+    }
+
     function getFavoriteGames() {
         var favoriteGamesStr = window.localStorage.getItem("FavoriteGames");
         var favoriteGames;
@@ -1218,6 +1229,8 @@
                 notifyWindowEvent("GameLoadEnd", null);
             }
         );
+
+        //getCompanyGameCategoryCode();
 
         SearchControll = new searchControlInit("alertSearch");
 

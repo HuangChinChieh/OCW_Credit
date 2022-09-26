@@ -514,8 +514,6 @@
         gameInitByOther();
         changeMultImg();
     }
-   
-    
 
     function init() {
         if (self == top) {

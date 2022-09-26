@@ -148,7 +148,7 @@
                     } else {
                         orderVal = 2;
                     }
-                }  
+                }
             } else {
                 GI.classList.add("is-hide");
 
@@ -291,16 +291,48 @@
         //selGameCategory(nowCateg);
     }
 
+    function createGameListData() {
+        LobbyGameList = {};
+        var CategoryList = [];
+    
+        GCB.GetGameCategoryCode((categoryCodeItem) => {
+           var BrandCode = categoryCodeItem.GameBrand;
+           var BrandCateg = categoryCodeItem.GameCategoryCode;
+           var GameCategorySubCode = categoryCodeItem.GameCategorySubCode;
+            var index = CategoryList.findIndex(c => c.Categ == BrandCateg);
+            if (index == -1) {
+                var category = {
+                    Categ: BrandCateg,
+                    SubCategList: [GameCategorySubCode]
+                };
+
+                CategoryList.push(category);
+            } else {
+         
+                var subCategList = CategoryList[index].SubCategList;
+                if (!subCategList.includes(GameCategorySubCode)) {
+                    subCategList.push(GameCategorySubCode);
+                    CategoryList[index].SubCategList = subCategList;
+                };
+
+            }
+        }, () => {
+            LobbyGameList.CategoryList = CategoryList;
+        });
+    }
+
     function init() {
         if (self == top) {
             window.location.href = "index.aspx";
         }
-
+        GCB = window.parent.API_GetGCB();
         WebInfo = window.parent.API_GetWebInfo();
         p = window.parent.API_GetLobbyAPI();
         nowCateg = c.getParameter("Category");
         nowSubCateg = c.getParameter("SubCategory");
         lang = window.parent.API_GetLang();
+
+        createGameListData();
 
         if (WebInfo.IsOpenGame) {
             WebInfo.IsOpenGame = false;
@@ -357,7 +389,7 @@
     function createITag(Category) {
         var iTag = document.createElement("i");
         var iTagCls = "";
-        
+
         switch (Category) {
             case "All":
                 iTagCls = "icon-casinoworld-menu";
