@@ -897,29 +897,29 @@
 
     //FavoriteGame
     function favBtnEvent(gameBrand, gameName) {
-        var target = event.currentTarget;
-        var type = target.classList.contains("add") ? 1 : 0;
+        if (EWinWebInfo.UserLogined) {
+            var btn = event.currentTarget;
+            var gameCode = gameBrand + "." + gameName;
 
-        if (type == 0) {
+            event.stopPropagation();
 
-            showMessageInGameInfo(mlp.getLanguageKey("我的最愛"), mlp.getLanguageKey("加入我的最愛"), function () {
-                target.classList.add("add");
-                setFavoriteGame(gameBrand, gameName, type);
-                if (document.getElementById('IFramePage').contentWindow.refreshFavoGame) {
-                    document.getElementById('IFramePage').contentWindow.refreshFavoGame();
-                }
-                //setGameLobbySection(nowWebTag);
-            }, null);
+            if ($(btn).hasClass("add")) {
+                $(btn).removeClass("add");
+                GCB.RemoveFavo(gameCode, function () {
+                    window.parent.API_RefreshPersonalFavo(gameCode, false);
+                });
+            } else {
+                $(btn).addClass("add");
+                GCB.AddFavo(gameCode, function () {
+                    window.parent.API_RefreshPersonalFavo(gameCode, true);
+                });
+            }
         } else {
-            showMessageInGameInfo(mlp.getLanguageKey("我的最愛"), mlp.getLanguageKey("是否從我的最愛移除"), function () {
-                target.classList.remove("add");
-                setFavoriteGame(gameBrand, gameName, type);
-                if (document.getElementById('IFramePage').contentWindow.refreshFavoGame) {
-                    document.getElementById('IFramePage').contentWindow.refreshFavoGame();
-                }
-                //setGameLobbySection(nowWebTag);
+            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                API_LoadPage("Login", "Login.aspx");
             }, null);
         }
+
     };
 
     function getFavoriteGames() {
