@@ -1166,6 +1166,8 @@ select.custom-style:focus {
   -ms-flex-align: center;
   align-items: center;
   border: solid 1px #b0b0b0;
+  height: 100%;
+  display: none;
 }
 
 
@@ -1223,13 +1225,29 @@ select.custom-style:focus {
   justify-content: space-between;
   border: solid 1px #b0b0b0;
   z-index: 3;
+  height: calc(64px - 20px);
 }
+
+
 
 @media (min-width: 768px){
   .navbar-search {
     display: inherit;
   }
 
+  .search-bar.desktop {
+      display: inherit;
+  }
+  .search-bar.mobile {
+    display: none;
+  }
+
+}
+
+@media (max-width: 540px){
+  .search-bar.mobile{
+    height: calc(54px - 20px);
+  }
 }
 
 /* FAKE INPUT ============== */
@@ -1245,7 +1263,8 @@ select.custom-style:focus {
   -webkit-transform-origin: center center;
   transform-origin: center center;
 }
-i {
+
+i{
   font-style: oblique;
 }
 
