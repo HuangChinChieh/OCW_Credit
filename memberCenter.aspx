@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" %>
 <% 
     string Version=EWinWeb.Version;
-    string PersonCode=EWinWeb.MainPersonCode;
 %>
    
 <!DOCTYPE html>
@@ -40,7 +39,6 @@
     var BackCardInfo = null;
     var v = "<%:Version%>";
     var swiper;
-    var PersonCode = "<%:PersonCode%>";
     var ParentPersonCode = "";
     function cancelWalletPassword() {
         var idWalletLoginPassword = document.getElementById("idWalletLoginPassword");
@@ -152,6 +150,19 @@
         KYCRealName.innerText=
         RealName.innerText = WebInfo.UserInfo.RealName;
         LoginAccount.innerText = WebInfo.UserInfo.LoginAccount;
+        //出款門檻
+        var ThresholdInfos = WebInfo.UserInfo.ThresholdInfo;
+        if (ThresholdInfos && ThresholdInfos.length > 0) {
+            let thresholdInfo = ThresholdInfos.find(x => x.CurrencyType.toLocaleUpperCase() == WebInfo.MainCurrencyType);
+            if (thresholdInfo) {
+                document.getElementById("idThrehold").innerText = new BigNumber(thresholdInfo.ThresholdValue).toFormat();
+            } else {
+                document.getElementById("idThrehold").innerText = "0";
+            }
+        } else {
+            document.getElementById("idThrehold").innerText = "0";
+        }
+
 
         Phone.innerText = WebInfo.UserInfo.ContactPhonePrefix + " " + WebInfo.UserInfo.ContactPhoneNumber;
         Amount.innerText = new BigNumber(WebInfo.UserInfo.WalletList.find(x => x.CurrencyType == window.parent.API_GetCurrency()).PointValue).toFormat();
@@ -222,19 +233,19 @@
 
         });
 
-        p.GetParentPersonCode(WebInfo.SID, Math.uuid(), function (success, o) {
-            if (success) {
-                if (o.ResultState == 0) {
-                    ParentPersonCode = o.Message;
-                    //直客
-                    if (ParentPersonCode == PersonCode) {
-                        $('#idPaymentDepositHistoryBox').removeClass('is-hide');
-                    } else {
-                        $('#idAgentWithdrawalHistoryBox').removeClass('is-hide');
-                    }
-                }
-            }
-        });
+        //p.GetParentPersonCode(WebInfo.SID, Math.uuid(), function (success, o) {
+        //    if (success) {
+        //        if (o.ResultState == 0) {
+        //            ParentPersonCode = o.Message;
+        //            //直客
+        //            if (ParentPersonCode == PersonCode) {
+        //                $('#idPaymentDepositHistoryBox').removeClass('is-hide');
+        //            } else {
+        //                $('#idAgentWithdrawalHistoryBox').removeClass('is-hide');
+        //            }
+        //        }
+        //    }
+        //});
 
         memberInit();
         changeAvatar(getCookie("selectAvatar"));
@@ -679,6 +690,19 @@
                             </div>
                         </div>
 
+                        <%-- 出款門檻--%>
+                               <div class="box-item expansion">
+                            <div class="box-item-inner tab">
+                                <i class="icon-user"></i>
+                                <div class="box-item-detail">
+                                    <div class="box-item-title sup language_replace">取款門檻</div>
+                                    <div id="idThrehold" class="box-item-desc highlight"></div>
+                                </div>
+                            
+                            </div>
+               
+                        </div>
+
                         <!-- 生日 -->
                         <%--  <div class="box-item">
                             <div class="box-item-inner tab">
@@ -839,7 +863,7 @@
                             </div>
                         </div>
                         <!-- 存款紀錄 -->
-                        <div id="idAgentWithdrawalHistoryBox" class="box-item expansion is-hide">
+                <%--        <div id="idAgentWithdrawalHistoryBox" class="box-item expansion is-hide">
                             <div class="box-item-inner tab">
                                 <i class="icon-wallet"></i>
                                 <div class="box-item-detail">
@@ -849,7 +873,7 @@
                                     <span class="language_replace">檢視</span>
                                 </button>
                             </div>
-                        </div>
+                        </div>--%>
                         <!-- 我的推廣碼 -->
                         <div class="box-item expansion is-hide"  id="idPersonCodeDiv" style="display: none;">
                             <div class="box-item-inner tab">

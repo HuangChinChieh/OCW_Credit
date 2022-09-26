@@ -1067,7 +1067,7 @@
                         });
                     } else {
                         EWinWebInfo.UserLogined = false;
-                        showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請重新登入") + ":" + mlp.getLanguageKey(obj.Message) , function () {
+                        showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請重新登入"), function () {
                             API_Logout();
                         });
 
@@ -1718,7 +1718,7 @@
                     </ul>
 
                     <ul class="nav-group is-hide" id="navWalletGroup">
-                        <li class="is-hide navDeposit">
+                    <%--    <li class="is-hide navDeposit">
                             <a onclick="API_LoadPage('Deposit','Deposit.aspx', true)">
                                 <i class="icon-deposit"></i>
                                 <span class="language_replace">存款</span>
@@ -1730,18 +1730,13 @@
                                 <span class="language_replace">出款</span>
                             </a>
                         </li>
-                        <%--<li>
-                            <a onclick="API_LoadPage('Withdraw','Withdraw.aspx', true)">
-                                <i class="icon-deposit"></i>
-                                <span class="language_replace">出款</span>
-                            </a>
-                        </li>--%>
+             
                          <li>
                             <a onclick="API_LoadPage('WalletCenter','WalletCenter.aspx', true)">
                                 <i class="icon-wallet"></i>
                                 <span class="language_replace">錢包中心</span>
                             </a>
-                        </li>
+                        </li>--%>
                         <!--li style="">
                             <a onclick="API_LoadPage('QA','/Article/guide_Q&A_jp.html')">
                                 <i class="icon-service"></i>
