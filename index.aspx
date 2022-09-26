@@ -370,61 +370,61 @@
     }
 
     function API_OpenGameCode(gameBrand, gameName) {
-        GCB.GetByGameCode(gameBrand + "." + gameName, (gameItem) => {
-            var rtpInfoJson = gameItem.RTPInfo;
-            var categ = gameItem.GameCategoryCode;
+        var gameItem = LobbyGameList.GameList.find(x => x.GameBrand == gameBrand && x.GameName == gameName);
+        var rtpInfoJson = gameItem.RTPInfo;
+        var categ = gameItem.Categ;
 
-            var divMessageBox = document.getElementById("alertGameIntro");
+        var divMessageBox = document.getElementById("alertGameIntro");
+        var isInFavoGames = checkInFavoriteGame(gameBrand, gameName);
 
-            if (divMessageBox != null) {
-                divMessageBox.querySelector(".gameRealName").innerText = API_GetGameLang(1, gameBrand, gameName);
-                divMessageBox.querySelector(".GameID").innerText = c.padLeft(gameItem.GameID.toString(), 5);
-                divMessageBox.querySelector(".GameImg").src = EWinWebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameBrand + "/PC/" + EWinWebInfo.Lang + "/" + gameName + ".png";
-                divMessageBox.querySelector(".GameImg").onerror = new Function("setDefaultIcon('" + gameBrand + "', '" + gameName + "')");
+        if (divMessageBox != null) {
+            divMessageBox.querySelector(".gameRealName").innerText = API_GetGameLang(1, gameBrand, gameName);
+            divMessageBox.querySelector(".GameID").innerText = c.padLeft(gameItem.GameID.toString(), 5);
+            divMessageBox.querySelector(".GameImg").src = EWinWebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameBrand + "/PC/" + EWinWebInfo.Lang + "/" + gameName + ".png";
+            divMessageBox.querySelector(".GameImg").onerror = new Function("setDefaultIcon('" + gameBrand + "', '" + gameName + "')");
 
-                if (rtpInfoJson) {
-                    let JSON_RTPInfo = JSON.parse(rtpInfoJson);
-                    divMessageBox.querySelector(".game-rtp").classList.remove("is-hide");
+            if (rtpInfoJson) {
+                let JSON_RTPInfo = JSON.parse(rtpInfoJson);
+                divMessageBox.querySelector(".game-rtp").classList.remove("is-hide");
 
-                    if (JSON_RTPInfo["RTP"] == "0") {
-                        divMessageBox.querySelector(".game-rtp").classList.add("is-hide");
-                    } else {
-                        divMessageBox.querySelector(".RtpContent").innerText = JSON_RTPInfo["RTP"];
-                    }
+                if (JSON_RTPInfo["RTP"] == "0") {
+                    divMessageBox.querySelector(".game-rtp").classList.add("is-hide");
                 } else {
-                    divMessageBox.querySelector(".game-rtp").classList.remove("is-hide");
-                    divMessageBox.querySelector(".RtpContent").innerText = "-";
+                    divMessageBox.querySelector(".RtpContent").innerText = JSON_RTPInfo["RTP"];
                 }
-
-                if (gameItem.IsFavo == 1) {
-                    divMessageBox.querySelector(".game-myFavorite").classList.add("add");
-                    divMessageBox.querySelector(".FavoText").innerText = mlp.getLanguageKey("移除最愛");
-                } else {
-                    divMessageBox.querySelector(".game-myFavorite").classList.remove("add");
-                    divMessageBox.querySelector(".FavoText").innerText = mlp.getLanguageKey("加入我的最愛");
-                }
-
-                divMessageBox.querySelector(".game-myFavorite").onclick = new Function("favBtnEvent('" + gameBrand + "', '" + gameName + "')");
-
-                if (gameItem.AllowDemoPlay == 1) {
-                    divMessageBox.querySelector(".game-demo").classList.remove("is-hide");
-                    divMessageBox.querySelector(".game-demo").onclick = new Function("openDemo('" + gameBrand + "', '" + gameName + "' , '" + categ + "')");
-                } else {
-                    divMessageBox.querySelector(".game-demo").classList.add("is-hide");
-                }
-
-
-                if (EWinWebInfo.UserLogined) {
-                    divMessageBox.querySelector(".game-login").innerText = mlp.getLanguageKey("開始遊戲");
-                    divMessageBox.querySelector(".game-login").onclick = new Function("openGame('" + gameBrand + "', '" + gameName + "' , '" + categ + "')");
-                } else {
-                    divMessageBox.querySelector(".game-login").innerText = mlp.getLanguageKey("登入玩遊戲");
-                    divMessageBox.querySelector(".game-login").onclick = new Function("openGame('" + gameBrand + "', '" + gameName + "' , '" + categ + "')");
-                }
-
-                GameInfoModal.toggle();
+            } else {
+                divMessageBox.querySelector(".game-rtp").classList.remove("is-hide");
+                divMessageBox.querySelector(".RtpContent").innerText = "-";
             }
-        });
+
+            if (isInFavoGames) {
+                divMessageBox.querySelector(".game-myFavorite").classList.add("add");
+                divMessageBox.querySelector(".FavoText").innerText = mlp.getLanguageKey("移除最愛");
+            } else {
+                divMessageBox.querySelector(".game-myFavorite").classList.remove("add");
+                divMessageBox.querySelector(".FavoText").innerText = mlp.getLanguageKey("加入我的最愛");
+            }
+
+            divMessageBox.querySelector(".game-myFavorite").onclick = new Function("favBtnEvent('" + gameBrand + "', '" + gameName + "')");
+
+            if (gameItem.AllowDemoPlay == 1) {
+                divMessageBox.querySelector(".game-demo").classList.remove("is-hide");
+                divMessageBox.querySelector(".game-demo").onclick = new Function("openDemo('" + gameBrand + "', '" + gameName + "' , '" + categ + "')");
+            } else {
+                divMessageBox.querySelector(".game-demo").classList.add("is-hide");
+            }
+
+
+            if (EWinWebInfo.UserLogined) {
+                divMessageBox.querySelector(".game-login").innerText = mlp.getLanguageKey("開始遊戲");
+                divMessageBox.querySelector(".game-login").onclick = new Function("openGame('" + gameBrand + "', '" + gameName + "' , '" + categ + "')");
+            } else {
+                divMessageBox.querySelector(".game-login").innerText = mlp.getLanguageKey("登入玩遊戲");
+                divMessageBox.querySelector(".game-login").onclick = new Function("openGame('" + gameBrand + "', '" + gameName + "' , '" + categ + "')");
+            }
+
+            GameInfoModal.toggle();
+        }
     }
 
     function API_LoadPage(title, url, checkLogined) {
@@ -835,12 +835,6 @@
     }
 
     function openGame(gameBrand, gameName, categ) {
-        var alertSearch = $("#alertSearch");
-
-        if (alertSearch.css("display") == "block") {
-            alertSearchCloseButton.click();
-        }
-
         if (!EWinWebInfo.UserLogined) {
             showMessageInGameInfo(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
                 GameInfoModal.hide();
@@ -848,13 +842,7 @@
             }, null);
         } else {
             EWinWebInfo.IsOpenGame = true;
-
-            GCB.AddPlayed(gameBrand + "." + gameName, function (success) {
-                if (success) {
-
-                }
-            });
-
+            setGameCodeToMyGames(gameBrand, gameName);
             GameInfoModal.hide();
 
             if (gameBrand.toUpperCase() != "EWin".toUpperCase()) {
@@ -865,11 +853,7 @@
                     GameLoadPage("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + API_GetCurrency() + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + window.location.href);
                 }
             } else {
-                GCB.AddPlayed(gameBrand + "." + gameName, function (success) {
-                    if (success) {
-
-                    }
-                });
+                setGameCodeToMyGames(gameBrand, gameName);
                 GameInfoModal.hide();
                 window.open("/OpenGame.aspx?SID=" + EWinWebInfo.SID + "&Lang=" + EWinWebInfo.Lang + "&CurrencyType=" + API_GetCurrency() + "&GameBrand=" + gameBrand + "&GameName=" + gameName + "&HomeUrl=" + window.location.href, "_blank")
             }
@@ -897,29 +881,29 @@
 
     //FavoriteGame
     function favBtnEvent(gameBrand, gameName) {
-        if (EWinWebInfo.UserLogined) {
-            var btn = event.currentTarget;
-            var gameCode = gameBrand + "." + gameName;
+        var target = event.currentTarget;
+        var type = target.classList.contains("add") ? 1 : 0;
 
-            event.stopPropagation();
+        if (type == 0) {
 
-            if ($(btn).hasClass("add")) {
-                $(btn).removeClass("add");
-                GCB.RemoveFavo(gameCode, function () {
-                    window.parent.API_RefreshPersonalFavo(gameCode, false);
-                });
-            } else {
-                $(btn).addClass("add");
-                GCB.AddFavo(gameCode, function () {
-                    window.parent.API_RefreshPersonalFavo(gameCode, true);
-                });
-            }
+            showMessageInGameInfo(mlp.getLanguageKey("我的最愛"), mlp.getLanguageKey("加入我的最愛"), function () {
+                target.classList.add("add");
+                setFavoriteGame(gameBrand, gameName, type);
+                if (document.getElementById('IFramePage').contentWindow.refreshFavoGame) {
+                    document.getElementById('IFramePage').contentWindow.refreshFavoGame();
+                }
+                //setGameLobbySection(nowWebTag);
+            }, null);
         } else {
-            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
-                API_LoadPage("Login", "Login.aspx");
+            showMessageInGameInfo(mlp.getLanguageKey("我的最愛"), mlp.getLanguageKey("是否從我的最愛移除"), function () {
+                target.classList.remove("add");
+                setFavoriteGame(gameBrand, gameName, type);
+                if (document.getElementById('IFramePage').contentWindow.refreshFavoGame) {
+                    document.getElementById('IFramePage').contentWindow.refreshFavoGame();
+                }
+                //setGameLobbySection(nowWebTag);
             }, null);
         }
-
     };
 
     function getFavoriteGames() {
@@ -1085,7 +1069,7 @@
                         });
                     } else {
                         EWinWebInfo.UserLogined = false;
-                        showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請重新登入"), function () {
+                        showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請重新登入") + ":" + mlp.getLanguageKey(obj.Message), function () {
                             API_Logout();
                         });
 
@@ -1594,7 +1578,7 @@
 
                         GI = c.getTemplate("tmpSearchGameItem");
                         let GI1 = $(GI);
-                        GI.onclick = new Function("openGame('" + gameItem.GameBrand + "', '" + gameItem.GameName + "','" + gameItem.GameCategoryCode + "')");
+                        GI.onclick = new Function("openGame('" + gameItem.GameBrand + "', '" + gameItem.GameName + "','" + lang_gamename + "')");
 
                         GI1.addClass("group" + parseInt(gameItemCount / 60));
                         gameItemCount++;
@@ -2028,14 +2012,14 @@
         </script>
 
         <!-- 主選單 -->
-        <div class="nav">           
+        <div class="nav">
+            <div class="search-bar mobile" data-toggle="modal" data-target="#alertSearch">
+                <span class="text language_replace">遊戲搜尋</span>
+                <span class="btn btn-search">
+                    <i class="icon icon-mask icon-search"></i>
+                </span>
+            </div>
             <nav class="nav-drawer">
-                <div class="search-bar mobile" data-toggle="modal" data-target="#alertSearch">
-                    <span class="text language_replace">遊戲搜尋</span>
-                    <span class="btn btn-search">
-                        <i class="icon icon-mask icon-search"></i>
-                    </span>
-                </div>
                 <div class="nav-drawer-inner">
                     <ul class="nav-group">
                         <li>
@@ -2125,7 +2109,7 @@
                     </ul>
 
                     <ul class="nav-group is-hide" id="navWalletGroup">
-                    <%--    <li class="is-hide navDeposit">
+                        <li class="is-hide navDeposit">
                             <a onclick="API_LoadPage('Deposit','Deposit.aspx', true)">
                                 <i class="icon-deposit"></i>
                                 <span class="language_replace">存款</span>
@@ -2137,13 +2121,18 @@
                                 <span class="language_replace">出款</span>
                             </a>
                         </li>
-             
+                        <%--<li>
+                            <a onclick="API_LoadPage('Withdraw','Withdraw.aspx', true)">
+                                <i class="icon-deposit"></i>
+                                <span class="language_replace">出款</span>
+                            </a>
+                        </li>--%>
                          <li>
                             <a onclick="API_LoadPage('WalletCenter','WalletCenter.aspx', true)">
                                 <i class="icon-wallet"></i>
                                 <span class="language_replace">錢包中心</span>
                             </a>
-                        </li>--%>
+                        </li>
                         <!--li style="">
                             <a onclick="API_LoadPage('QA','/Article/guide_Q&A_jp.html')">
                                 <i class="icon-service"></i>
@@ -2619,7 +2608,7 @@
                 </div>
             </label>
         </li>
-    </div> 
+    </div>
 
     <div id="tmpSearchGameItem" class="is-hide">
         <div class="game-item col-auto">
@@ -2669,5 +2658,6 @@
             </div>
         </div>
     </div>
+	<!-- -->
 </body>
 </html>
