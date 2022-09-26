@@ -2603,7 +2603,7 @@
                 </div>
             </label>
         </li>
-    </div>
+    </div> 
 
     <div id="tmpSearchGameItem" class="is-hide">
         <div class="game-item col-auto">
