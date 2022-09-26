@@ -396,7 +396,7 @@ public class LobbyAPI : System.Web.Services.WebService {
 
         SI = RedisCache.SessionContext.GetSIDInfo(WebSID);
         if (SI != null && !string.IsNullOrEmpty(SI.EWinSID)) {
-             return  casino3651API.GetParentPersonCode(GetToken(), SI.EWinSID, GUID);
+            return  casino3651API.GetParentPersonCode(GetToken(), SI.EWinSID, GUID);
         } else {
             var R = new EWin.CASINO.APIResult() {
                 ResultState =  EWin.CASINO.enumResultState.ERR,
@@ -929,6 +929,23 @@ public class LobbyAPI : System.Web.Services.WebService {
         }
 
         return result;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.GameBrandResult GetGameBrand(string GUID) {
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        var a = lobbyAPI.GetGameBrand(GetToken(), GUID);
+        return a;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.CompanyGameCodeResult GetCompanyGameCodeByUpdateTimestamp(string GUID, long UpdateTimestamp, int GameID) {
+
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        return lobbyAPI.GetCompanyGameCodeByUpdateTimestamp(GetToken(), GUID, UpdateTimestamp, GameID);
+
     }
 
     private string GetToken() {
