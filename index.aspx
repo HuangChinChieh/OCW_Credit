@@ -375,7 +375,6 @@
             var categ = gameItem.GameCategoryCode;
 
             var divMessageBox = document.getElementById("alertGameIntro");
-            var isInFavoGames = checkInFavoriteGame(gameBrand, gameName);
 
             if (divMessageBox != null) {
                 divMessageBox.querySelector(".gameRealName").innerText = API_GetGameLang(1, gameBrand, gameName);
