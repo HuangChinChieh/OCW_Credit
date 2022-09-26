@@ -1272,6 +1272,10 @@ i {
 
 
 /* Header Search POPUP ============== */
+.btn-primary{
+  transition: all 0.3s ease-in-out;
+}
+
 .wrapper_center {
   text-align: center;
   margin: 0 auto;
@@ -1284,6 +1288,78 @@ i {
   justify-content: center;
   max-width: 640px;
   margin-bottom: 0.6rem;
+}
+
+.wrapper_center .btn {
+  font-weight: 500;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  /* -webkit-transition: background-color 0.3s ease-in;
+  transition: background-color 0.3s ease-in; */
+}
+.wrapper_center .btn+.btn {
+  margin-left: 10px;
+}
+
+.img-wrap, .img_crop {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+
+.game-item {
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+  width: 100%;
+}
+
+.game-item-img {
+  position: relative;
+  z-index: 2;
+}
+
+.game-item-inner {
+  position: relative;
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.game-item-link {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.game-item .img-wrap {
+  position: relative;
+  padding-bottom: 100%;
+  border-radius: 8px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.game-item .img-wrap img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -1318,6 +1394,17 @@ i {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between
+}
+
+.alertSearchTemp .modal-header .close{
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 48px;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  padding: 1rem;
+  margin: -1rem -1rem -1rem auto;
+
 }
 
 .alertSearchTemp .modal-title {
@@ -1362,6 +1449,11 @@ i {
 .alertSearchTemp .game-item {
   padding: 8px 8px;
   margin-bottom: 0 !important
+}
+
+.alertSearchTemp .game-item .img-wrap {
+
+ 
 }
 
 .alertSearchTemp .game-item-inner {
@@ -1432,10 +1524,16 @@ i {
 }
 
 .brand-wrapper .btn-brand-confirm {
-  background-color: #009FE8;
+  /* background-color: #009FE8; */
   border-radius: 30px;
   max-width: 150px;
-  padding: 6px 20px !important
+  padding: 6px 20px !important;
+  /* background-image: -webkit-gradient(linear, left top, right top, from(#A445B2), color-stop(50%, #FF0066), to(#D41872));
+  background-image: linear-gradient(to right, #A445B2 0%, #FF0066 50%, #D41872 100%);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; */
+  color: #fff;
+  
 }
 
 .brand-wrapper .btn-brand-cancel {
@@ -1552,8 +1650,21 @@ i {
 }
 
 .searchFilter-wrapper .btn-reset-popup {
-  color: #009FE8;
-  border: solid 1px #009FE8
+  /* color: #009FE8;
+  border: solid 1px #009FE8; */
+  color: #82008b;
+  border: solid 1px #82008b;
+  -webkit-transition: background-image 0.3s ease-in-out;
+  transition: background-image 0.3s ease-in-out;
+}
+
+.searchFilter-wrapper .btn-reset-popup:not(:disabled):hover {
+  color: #fff;
+  /* background-color: #3db6ff;
+  border-color: #3db6ff; */
+  background-image: -webkit-gradient(linear, left top, right top, from(#A445B2), color-stop(50%, #FF0066), to(#D41872));
+    background-image: linear-gradient(to right, #A445B2 0%, #FF0066 50%, #D41872 100%);
+    border: solid 1px #82008b;
 }
 
 .searchFilter-wrapper .btn {
@@ -3577,6 +3688,10 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   max-width: 640px !important;
   width: calc(100% - 20px);
 }
+.modal.show .modal-dialog.modal-xl{
+  max-width: 1200px !important;
+}
+
 
 .notice-item {
   display: -webkit-box;
@@ -4782,3 +4897,245 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
 	}
 }
 	
+
+/* SEARCH BRAND POPUP CONTENT*/
+.custom-checkboxValue-noCheck {
+  padding-left: 0
+}
+
+.custom-checkboxValue-noCheck,
+.custom-checkboxValue-noCheck *,
+.custom-checkboxValue-noCheck :after,
+.custom-checkboxValue-noCheck :before,
+.custom-checkboxValue-noCheck:after,
+.custom-checkboxValue-noCheck:before {
+  -webkit-transition: all 0.15s ease-in;
+  transition: all 0.15s ease-in
+}
+
+.custom-checkboxValue-noCheck .custom-input:after,
+.custom-checkboxValue-noCheck .custom-input:before {
+  content: none
+}
+
+.custom-checkboxValue-noCheck .checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap;
+  width: 100%;
+  align-items: center;
+}
+
+.custom-checkboxValue-noCheck .checkbox .radioText {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-align: center
+}
+
+.custom-checkboxValue-noCheck .custom-control-input-hidden~.checkbox {
+  border: solid 1px #c2c2c2;
+  border-radius: 10px
+}
+
+.custom-checkboxValue-noCheck .custom-control-input-hidden:checked~.checkbox {
+  -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 110, 255, 0.55);
+  box-shadow: 0px 0px 5px 3px rgba(0, 110, 255, 0.55);
+  border-color: #009FE8
+}
+
+.custom-checkboxValue-noCheck:hover .custom-label {
+  cursor: pointer
+}
+
+.game-item-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap
+}
+
+.game-item-group.list-row .game-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem
+}
+
+.game-item-group.list-row .game-item .gameName {
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal
+}
+
+.game-item-group.list-row .game-item-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap
+}
+
+.game-item-group.list-row .game-item-img {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 80px;
+  flex: 0 0 80px;
+  margin-right: 0.5rem
+}
+
+.game-item-group.list-row .game-item-info {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1
+}
+
+.game-item-group.list-row .game-item-info-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 100%
+}
+
+.game-item-group.list-row .game-item-info-brief {
+  padding-right: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -ms-flex-line-pack: justify;
+  align-content: space-between;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1
+}
+
+.game-item-group.list-row .game-item-info-indicator .action {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%
+}
+
+.game-item-group.list-row .game-item-info-indicator .btn-s-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 0;
+  margin-right: 0.5rem
+}
+
+.game-item-group.list-row .game-item-info-indicator .btn-play {
+  border-radius: 20px
+}
+
+.game-item-group.list-row .game-item-info-moreInfo {
+  width: 100%
+}
+
+.game-item-group.list-row .game-item-info-moreInfo .title {
+  font-size: 0.8125rem
+}
+
+.game-item-group.list-row .game-item-info-moreInfo .value {
+  font-size: 1rem
+}
+
+.game-item-group.list-row .game-item .moreInfo-item-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between
+}
+
+.game-item-group.list-grid .game-item {
+  position: relative;
+  padding: 12px;
+  width: calc(20% - 24px)
+}
+
+.game-item-group .game-item .action .btn-like {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(0, 0, 0, 0.85);
+  color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  font-size: 1rem;
+}
+
+.game-item-group .game-item .action .btn-like:not(.added).desktop:hover {
+  color: #ff0000
+}
+
+.game-item-group .game-item .action .btn-like:not(.added).desktop:hover .icon-m-favorite:before {
+  content: "b"
+}
+
+.game-item-group .game-item .action .btn-like.added {
+  color: #ff0000;
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+.btn-like.added .icon-casinoworld-heart-o:before {
+  content: "B";
+}
+
+@media (min-width:936px) {
+  .game-item-group.list-row .game-item {
+    width: 50%
+  }
+}
+
+
+@media (any-hover:hover) {
+  .game-item-group .game-item .action .btn-like:not(.added):hover {
+    color: #ff0000;
+  }
+}
+
+
+
+/* 查看更多 */
+.s-btn-more {
+  border-radius: 20px;
+  border: 1px solid #c0c0c0;
+  padding: 10px 50px;
+  width: fit-content;
+  font-size: 14px;
+  color: #666;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 20px auto;
+}
+
+.s-btn-more:hover {
+
+}

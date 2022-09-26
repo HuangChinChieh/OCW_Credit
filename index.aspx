@@ -1605,7 +1605,7 @@
                 </h1>
                 <div class="header_setting_content">
                      <!-- Search -->
-                     <div class="navbar-search nav-item" style="display: none;">
+                     <div class="navbar-search nav-item" style="display: ;">
                         <span class="search-bar desktop" data-toggle="modal" data-target="#alertSearch">
                             <span class="btn btn-search">
                                 <i class="icon icon-mask icon-search"></i>
@@ -1999,13 +1999,12 @@
     </div>
    
     <!-- Modal Search 品牌-LOGO版-->
-    <div class="modal fade no-footer alertSearchTemp show" id="alertSearch" tabindex="-1" style="display: ;"
+    <div class="modal fade no-footer alertSearchTemp" id="alertSearch" tabindex="-1" style="display: ;"
         aria-modal="true" role="dialog">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="modal-header-container">
-                        <!-- <h5 class="modal-title">我是logo</h5> -->
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                             id="alertSearchCloseButton">
                             <span aria-hidden="true">×</span>
@@ -2029,19 +2028,22 @@
                                 </select>
                             </div>
                             <div class="searchFilter-item input-group keyword">
-                                <input id="alertSearchKeyWord" type="text" class="form-control"
-                                    language_replace="placeholder" placeholder="キーワード" enterkeyhint="" langkey="キーワード">
-                                <label for="" class="form-label"><span class="language_replace"
-                                        langkey="キーワード">キーワード</span></label>
+                                <!-- <input id="alertSearchKeyWord" type="text" class="form-control"
+                                    language_replace="placeholder" placeholder="キーワード" enterkeyhint="" >
+                                <label for="" class="form-label"><span class="language_replace">キーワード</span></label> -->
+                                <label class="form-title language_replace">キーワード</label>
+                                <div class="input-group">
+                                    <input id="idValidateCode" name="ValidateCode" type="text" class="form-control" language_replace="placeholder" placeholder="">
+                                </div>
                             </div>
                             <div class="wrapper_center action-outter">
                                 <button type="button" class="btn btn btn-outline-main btn-sm btn-reset-popup"
                                     onclick="SearchControll.searchGameChangeClear()">
-                                    <span class="language_replace" langkey="重新設定">重新設定</span>
+                                    <span class="language_replace">重新設定</span>
                                 </button>
                                 <button onclick="SearchControll.searchGameList()" type="button"
-                                    class="btn btn-full-main btn-sm btn-search-popup">
-                                    <span class="language_replace" langkey="検索">検索</span>
+                                    class="btn btn-full-main btn-sm btn-search-popup btn-primary">
+                                    <span class="language_replace">検索</span>
                                 </button>
                             </div>
                         </div>
@@ -2347,16 +2349,13 @@
                                         </li>
                                     </ul>
                                     <div class="wrapper_center">
-
-                                        <button class="btn btn-full-main btn-brand-confirm" type="button"
+                                        <button class="btn btn-primary btn-brand-confirm" type="button"
                                             onclick="SearchControll.searchGameChangeConfirm()">
-                                            <span class="language_replace" langkey="確認">確認</span>
+                                            <span class="language_replace">確認</span>
                                         </button>
                                     </div>
 
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -2368,7 +2367,7 @@
                             <div class="search-result-inner">
                                 <div class="search-result-list">
                                     <div class="game-item-group list-row row" id="alertSearchContent">
-                                        <div class="game-item col-auto group0">
+                                        <div class="game-item col-auto">
                                             <div class="game-item-inner">
                                                 <div class="game-item-img">
                                                     <span class="game-item-link"></span>
@@ -2406,24 +2405,158 @@
                                                         <div class="game-item-info-indicator">
                                                             <div class="action">
                                                                 <div class="btn-s-wrapper">
-                                                                    <!-- 按讚 按鈕移除 -->
                                                                     <button type="button"
-                                                                        class="btn-thumbUp btn btn-round"
-                                                                        style="display: none;">
-                                                                        <i class="icon icon-m-thumup"></i>
-                                                                    </button>
-
-                                                                    <button type="button"
-                                                                        class="btn-like btn btn-round desktop">
-                                                                        <i class="icon icon-m-favorite"></i>
+                                                                        class="btn-like btn btn-round added">
+                                                                        <i class="icon icon-casinoworld-heart-o"></i>
                                                                     </button>
                                                                 </div>
-                                                                <!-- play 按鈕移除 -->
-                                                                <button type="button" class="btn btn-play"
-                                                                    style="display: none;">
-                                                                    <span class="language_replace title"
-                                                                        langkey="プレイ">プレイ</span><i class="triangle"></i>
-                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="game-item col-auto">
+                                            <div class="game-item-inner">
+                                                <div class="game-item-img">
+                                                    <span class="game-item-link"></span>
+                                                    <div class="img-wrap">
+                                                        <img class="gameimg"
+                                                            src="https://ewin.dev.mts.idv.tw/Files/GamePlatformPic/EWin/PC/CHT/EWinGaming.png"
+                                                            data-loaded="true">
+                                                    </div>
+                                                </div>
+                                                <div class="game-item-info">
+                                                    <div class="game-item-info-inner">
+                                                        <div class="game-item-info-brief">
+                                                            <div class="game-item-info-pre">
+                                                                <h3 class="gameName">真人百家樂(eWIN)</h3>
+                                                            </div>
+                                                            <div class="game-item-info-moreInfo">
+                                                                <ul class="moreInfo-item-wrapper">
+                                                                    <li class="moreInfo-item brand">
+                                                                        <h4 class="value BrandName">EWin</h4>
+                                                                    </li>
+                                                                    <li class="moreInfo-item category">
+                                                                        <h4 class="value GameCategoryCode">Live</h4>
+                                                                    </li>
+                                                                    <li class="moreInfo-item RTP">
+                                                                        <span class="title">RTP</span>
+                                                                        <span class="value number valueRTP">--</span>
+                                                                    </li>
+                                                                    <li class="moreInfo-item">
+                                                                        <span class="title">NO</span>
+                                                                        <span class="value number valueID">0</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="game-item-info-indicator">
+                                                            <div class="action">
+                                                                <div class="btn-s-wrapper">
+                                                                    <button type="button"
+                                                                        class="btn-like btn btn-round">
+                                                                        <i class="icon icon-casinoworld-heart-o"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="game-item col-auto">
+                                            <div class="game-item-inner">
+                                                <div class="game-item-img">
+                                                    <span class="game-item-link"></span>
+                                                    <div class="img-wrap">
+                                                        <img class="gameimg"
+                                                            src="https://ewin.dev.mts.idv.tw/Files/GamePlatformPic/EWin/PC/CHT/EWinGaming.png"
+                                                            data-loaded="true">
+                                                    </div>
+                                                </div>
+                                                <div class="game-item-info">
+                                                    <div class="game-item-info-inner">
+                                                        <div class="game-item-info-brief">
+                                                            <div class="game-item-info-pre">
+                                                                <h3 class="gameName">真人百家樂(eWIN)</h3>
+                                                            </div>
+                                                            <div class="game-item-info-moreInfo">
+                                                                <ul class="moreInfo-item-wrapper">
+                                                                    <li class="moreInfo-item brand">
+                                                                        <h4 class="value BrandName">EWin</h4>
+                                                                    </li>
+                                                                    <li class="moreInfo-item category">
+                                                                        <h4 class="value GameCategoryCode">Live</h4>
+                                                                    </li>
+                                                                    <li class="moreInfo-item RTP">
+                                                                        <span class="title">RTP</span>
+                                                                        <span class="value number valueRTP">--</span>
+                                                                    </li>
+                                                                    <li class="moreInfo-item">
+                                                                        <span class="title">NO</span>
+                                                                        <span class="value number valueID">0</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="game-item-info-indicator">
+                                                            <div class="action">
+                                                                <div class="btn-s-wrapper">
+                                                                    <button type="button"
+                                                                        class="btn-like btn btn-round">
+                                                                        <i class="icon icon-casinoworld-heart-o"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="game-item col-auto">
+                                            <div class="game-item-inner">
+                                                <div class="game-item-img">
+                                                    <span class="game-item-link"></span>
+                                                    <div class="img-wrap">
+                                                        <img class="gameimg"
+                                                            src="https://ewin.dev.mts.idv.tw/Files/GamePlatformPic/EWin/PC/CHT/EWinGaming.png"
+                                                            data-loaded="true">
+                                                    </div>
+                                                </div>
+                                                <div class="game-item-info">
+                                                    <div class="game-item-info-inner">
+                                                        <div class="game-item-info-brief">
+                                                            <div class="game-item-info-pre">
+                                                                <h3 class="gameName">真人百家樂(eWIN)</h3>
+                                                            </div>
+                                                            <div class="game-item-info-moreInfo">
+                                                                <ul class="moreInfo-item-wrapper">
+                                                                    <li class="moreInfo-item brand">
+                                                                        <h4 class="value BrandName">EWin</h4>
+                                                                    </li>
+                                                                    <li class="moreInfo-item category">
+                                                                        <h4 class="value GameCategoryCode">Live</h4>
+                                                                    </li>
+                                                                    <li class="moreInfo-item RTP">
+                                                                        <span class="title">RTP</span>
+                                                                        <span class="value number valueRTP">--</span>
+                                                                    </li>
+                                                                    <li class="moreInfo-item">
+                                                                        <span class="title">NO</span>
+                                                                        <span class="value number valueID">0</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="game-item-info-indicator">
+                                                            <div class="action">
+                                                                <div class="btn-s-wrapper">
+                                                                    <button type="button"
+                                                                        class="btn-like btn btn-round">
+                                                                        <i class="icon icon-casinoworld-heart-o"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2431,14 +2564,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="s-btn-more language_replace" onclick="SearchControll.rem()">查看更多</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
