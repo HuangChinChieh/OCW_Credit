@@ -1165,7 +1165,7 @@ select.custom-style:focus {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: solid 1px #007fbb
+  border: solid 1px #b0b0b0;
 }
 
 .search-bar.desktop .text {
@@ -1200,7 +1200,7 @@ select.custom-style:focus {
 }
 
 .search-bar.desktop .btn-search .icon:before {
-  background-color: #007fbb
+  background-color: #474646;
 }
 
 @media (min-width: 768px){
@@ -1272,6 +1272,37 @@ i {
 
 
 /* Header Search POPUP ============== */
+/* ICON MASK */
+.icon-mask {
+  width: 1rem;
+  height: 1rem
+}
+
+.icon-mask:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-position: center center;
+  mask-position: center center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: none;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-transition: all 0.15s ease;
+  transition: all 0.15s ease
+}
+
+.icon-mask.icon-search:before {
+  -webkit-mask-image: url(../images/theme/default/icon/icon_search.svg);
+  mask-image: url(../images/theme/default/icon/icon_search.svg);
+}
+
 .btn-primary{
   transition: all 0.3s ease-in-out;
 }

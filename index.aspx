@@ -4,7 +4,7 @@
     if (EWinWeb.IsInMaintain()) {
         Response.Redirect("/Maintain.aspx");
     }
-    string PersonCode = EWinWeb.MainPersonCode;
+
     string Token;
     int RValue;
     Random R = new Random();
@@ -130,14 +130,14 @@
 </head>
 <% if (EWinWeb.IsTestSite == false) { %>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WRNSR38PQ7"></script>
+<%--<script async src="https://www.googletagmanager.com/gtag/js?id=G-WRNSR38PQ7"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-097DC2GB6H');
-</script>
+</script>--%>
 <% } %>
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -196,7 +196,6 @@
     var selectedCurrency = '';
     var GameInfoModal;
     var v ="<%:Version%>";
-    var PersonCode = "<%:PersonCode%>";
     var ParentPersonCode = "";
     var test = "";
 
@@ -1229,19 +1228,6 @@
             mlpByGameCode.loadLanguageByOtherFile(EWinWebInfo.EWinUrl + "/GameCode.", EWinWebInfo.Lang, function () {
                 var dstPage = c.getParameter("DstPage");
 
-                lobbyClient.GetParentPersonCode(EWinWebInfo.SID, Math.uuid(), function (success, o) {
-                    if (success) {
-                        if (o.ResultState == 0) {
-                            ParentPersonCode = o.Message;
-                            if (ParentPersonCode == PersonCode) {
-                                $('.navDeposit').removeClass('is-hide');
-                            } else {
-
-                            }
-                        }
-                    }
-                });
-
                 if (dstPage) {
                     var loadPage;
                     switch (dstPage.toUpperCase()) {
@@ -1266,7 +1252,7 @@
                     API_Home();
                 }
 
-                getCompanyGameCode();
+                //getCompanyGameCode();
 
                 //登入Check
                 window.setTimeout(function () {

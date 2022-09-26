@@ -1,23 +1,19 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LoginRecover.aspx.cs" Inherits="LoginRecover" %>
 <%
-    EWin.Login.LoginAPI LoginAPI = new EWin.Login.LoginAPI();
+    EWin.LoginAPI LoginAPI = new EWin.LoginAPI();
     RecoverResult ResultObj = new RecoverResult();
-
-
     string Token = string.Empty;
     string NewRecoverToken = string.Empty;
     string SID = string.Empty;
     string MsgContent = string.Empty;
     string RecoverToken = string.Empty;
-    string LoginAccount = string.Empty;
 
-    LoginAccount = Request["LoginAccount"];
     RecoverToken = Request["RecoverToken"];
 
     //if ((string.IsNullOrEmpty(RecoverToken) == false) && (string.IsNullOrEmpty(Token) == false))
     if ((string.IsNullOrEmpty(RecoverToken) == false))
     {
-        EWin.Login.LoginResult LoginResult;
+        EWin.LoginResult LoginResult;
         int RValue;
         Random R = new Random();
 
@@ -29,9 +25,9 @@
         LoginResult = LoginAPI.RecoverLogin(Token, RecoverToken, CodingControl.GetUserIP());
         if (LoginResult != null)
         {
-            if (LoginResult.ResultState == EWin.Login.enumResultState.OK)
+            if (LoginResult.ResultState == EWin.enumResultState.OK)
             {
-                SID = RedisCache.SessionContext.CreateSID(EWinWeb.CompanyCode, LoginAccount, CodingControl.GetUserIP(), false, LoginResult.SID, LoginResult.CT);
+                SID = LoginResult.SID;
 
                 if (string.IsNullOrEmpty(LoginResult.RecoverToken) == false)
                 {
@@ -40,7 +36,6 @@
 
                 ResultObj.ResultCode = RecoverResult.enumResultCode.OK;
                 ResultObj.Token = Token;
-                ResultObj.LoginAccount = LoginAccount;
                 ResultObj.SID = SID;
                 ResultObj.RecoverToken = NewRecoverToken;
             }
