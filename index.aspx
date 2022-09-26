@@ -2012,14 +2012,14 @@
         </script>
 
         <!-- 主選單 -->
-        <div class="nav">
-            <div class="search-bar mobile" data-toggle="modal" data-target="#alertSearch">
-                <span class="text language_replace">遊戲搜尋</span>
-                <span class="btn btn-search">
-                    <i class="icon icon-mask icon-search"></i>
-                </span>
-            </div>
+        <div class="nav">           
             <nav class="nav-drawer">
+                <div class="search-bar mobile" data-toggle="modal" data-target="#alertSearch">
+                    <span class="text language_replace">遊戲搜尋</span>
+                    <span class="btn btn-search">
+                        <i class="icon icon-mask icon-search"></i>
+                    </span>
+                </div>
                 <div class="nav-drawer-inner">
                     <ul class="nav-group">
                         <li>
