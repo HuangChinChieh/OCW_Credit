@@ -536,7 +536,7 @@
             window.parent.SwitchGameHeader(0);
         }
 
-        HotList = window.parent.API_GetGameList(1);
+        //HotList = window.parent.API_GetGameList(1);
         window.parent.API_LoadingStart();
         mlp.loadLanguage(lang, function () {
             /*if (WebInfo.UserLogined) {
