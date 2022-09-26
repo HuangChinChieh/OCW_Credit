@@ -1221,6 +1221,7 @@ select.custom-style:focus {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  border: solid 1px #b0b0b0;
   z-index: 3;
 }
 
@@ -1417,6 +1418,9 @@ i {
 
 .alertSearchTemp .modal-dialog {
   min-height: 90%
+}
+.alertSearchTemp .modal-content {
+  height: 100%;
 }
 
 .alertSearchTemp .modal-header {
