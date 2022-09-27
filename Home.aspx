@@ -77,6 +77,7 @@
     var marqueeText = "<%=MarqueeText%>";
     var hasBulletin = <%=(string.IsNullOrEmpty(Bulletin) ? "false" : "true")%>;
     var HotList;
+    var GCB;
     var v ="<%:Version%>";
     //temp
     var HotCasino = [
@@ -135,10 +136,6 @@
         }
     ];
 
-    var MyGames;
-
-    var FavoGames;
-
     var FourGames = [
         {
             GameName: "EWinGaming",
@@ -175,49 +172,20 @@
     window.onload = init;
 
     function tempInit() {
-        //document.getElementById('idCasinoItemGroup').innerHTML = "";
-        //document.getElementById('idSlotItemGroup').innerHTML = "";
+        var favoriteGames = [];
+        var playedGames = [];
 
-        /*
-                for (var i = 0; i < HotList.length; i++) {
-                    var gameItem = HotList[i];
-        
-                    if (gameItem.Categ != "Baccarat" && gameItem.Categ != "Classic") {
-                        continue;
-                    }
-        
-                    var GI = c.getTemplate("idTempGameItem");
-                    var GI_img = GI.querySelector("img");
-                    var GI_a = GI.querySelector(".OpenGame");
-        
-                    if (GI_img != null) {
-                        GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
-                        GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                    }
-        
-                    c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
-                    GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-        
-                    if (gameItem.Categ == "Baccarat") {
-                        document.getElementById('idCasinoItemGroup').appendChild(GI);
-                    } else if (gameItem.Categ == "Classic") {
-                        document.getElementById('idSlotItemGroup').appendChild(GI);
-                    }
-                }
-        */
-        //init my game
-        document.getElementById('idMyGameItemGroup').innerHTML = "";
-        if (window.localStorage.getItem('MyGames')) {
-            MyGames = JSON.parse(window.localStorage.getItem('MyGames'));
-
-            if (MyGames && MyGames.length > 0) {
+        GCB.GetPlayed(function (data) {
+            playedGames.push(data);
+        }, function (data) {
+            if (playedGames && playedGames.length > 0) {
                 document.getElementById("idMyGameTitle").classList.remove("is-hide");
             } else {
                 document.getElementById("idMyGameTitle").classList.add("is-hide");
             }
 
-            for (var i = 0; i < MyGames.length; i++) {
-                var gameItem = MyGames[i];
+            for (var i = 0; i < playedGames.length; i++) {
+                var gameItem = playedGames[i];
                 var GI = c.getTemplate("idMyGameItem");
                 var GI_img = GI.querySelector("img");
                 var GI_a = GI.querySelector(".OpenGame");
@@ -231,22 +199,19 @@
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 document.getElementById('idMyGameItemGroup').appendChild(GI);
             }
-        } else {
-            document.getElementById("idMyGameTitle").classList.add("is-hide");
-        }
+        });
 
-        //init my game
-        document.getElementById('idFavoGameItemGroup').innerHTML = "";
-        FavoGames = window.parent.API_GetFavoGames();
-        if (FavoGames) {
-            if (FavoGames && FavoGames.length > 0) {
+        GCB.GetFavo(function (data) {
+            favoriteGames.push(data);
+        }, function (data) {
+            if (favoriteGames && favoriteGames.length > 0) {
                 document.getElementById("idFavoGameTitle").classList.remove("is-hide");
             } else {
                 document.getElementById("idFavoGameTitle").classList.add("is-hide");
             }
 
-            for (var i = 0; i < FavoGames.length; i++) {
-                var gameItem = FavoGames[i];
+            for (var i = 0; i < favoriteGames.length; i++) {
+                var gameItem = favoriteGames[i];
                 var GI = c.getTemplate("idMyGameItem");
                 var GI_img = GI.querySelector("img");
                 var GI_a = GI.querySelector(".OpenGame");
@@ -260,10 +225,7 @@
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 document.getElementById('idFavoGameItemGroup').appendChild(GI);
             }
-        } else {
-            document.getElementById("idFavoGameTitle").classList.add("is-hide");
-        }
-
+        });
 
         setFourGame(0);
         setFourGame(1);
@@ -271,74 +233,6 @@
         setFourGame(3);
         setFourGame(4);
         setFourGame(5);
-    }
-
-    function refreshMyGmae() {
-
-        var idMyGameItemGroup = document.getElementById('idMyGameItemGroup');
-        if (idMyGameItemGroup) {
-            idMyGameItemGroup.innerHTML = "";
-            if (window.localStorage.getItem('MyGames')) {
-                var MyGames = JSON.parse(window.localStorage.getItem('MyGames'));
-
-                if (MyGames && MyGames.length > 0) {
-                    document.getElementById("idMyGameTitle").classList.remove("is-hide");
-                } else {
-                    document.getElementById("idMyGameTitle").classList.add("is-hide");
-                }
-
-                for (var i = 0; i < MyGames.length; i++) {
-                    var gameItem = MyGames[i];
-                    var GI = c.getTemplate("idMyGameItem");
-                    var GI_img = GI.querySelector("img");
-                    var GI_a = GI.querySelector(".OpenGame");
-
-                    if (GI_img != null) {
-                        GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
-                        GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                    }
-
-                    c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
-                    GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                    idMyGameItemGroup.appendChild(GI);
-                }
-            } else {
-                document.getElementById("idMyGameTitle").classList.add("is-hide");
-            }
-        }
-    }
-
-    function refreshFavoGame() {
-        FavoGames = window.parent.API_GetFavoGames();
-        var idFavoGameItemGroup = document.getElementById('idFavoGameItemGroup');
-        if (idFavoGameItemGroup) {
-            idFavoGameItemGroup.innerHTML = "";
-            if (FavoGames) {
-                if (FavoGames && FavoGames.length > 0) {
-                    document.getElementById("idFavoGameTitle").classList.remove("is-hide");
-                } else {
-                    document.getElementById("idFavoGameTitle").classList.add("is-hide");
-                }
-
-                for (var i = 0; i < FavoGames.length; i++) {
-                    var gameItem = FavoGames[i];
-                    var GI = c.getTemplate("idMyGameItem");
-                    var GI_img = GI.querySelector("img");
-                    var GI_a = GI.querySelector(".OpenGame");
-
-                    if (GI_img != null) {
-                        GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
-                        GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                    }
-
-                    c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
-                    GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                    document.getElementById('idFavoGameItemGroup').appendChild(GI);
-                }
-            } else {
-                document.getElementById("idFavoGameTitle").classList.add("is-hide");
-            }
-        }
     }
 
     function setFourGame(index) {
@@ -509,6 +403,37 @@
         }
     }
 
+    function refreshFavGame() {
+        var favoriteGames = [];
+        document.getElementById('idFavoGameItemGroup').innerHTML = "";
+
+        GCB.GetFavo(function (data) {
+            favoriteGames.push(data);
+        }, function (data) {
+            if (favoriteGames && favoriteGames.length > 0) {
+                document.getElementById("idFavoGameTitle").classList.remove("is-hide");
+            } else {
+                document.getElementById("idFavoGameTitle").classList.add("is-hide");
+            }
+
+            for (var i = 0; i < favoriteGames.length; i++) {
+                var gameItem = favoriteGames[i];
+                var GI = c.getTemplate("idMyGameItem");
+                var GI_img = GI.querySelector("img");
+                var GI_a = GI.querySelector(".OpenGame");
+
+                if (GI_img != null) {
+                    GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
+                    GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
+                }
+
+                c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
+                GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
+                document.getElementById('idFavoGameItemGroup').appendChild(GI);
+            }
+        });
+    }
+
     function updateBaseInfo() {
         tempInit();
         gameInitByOther();
@@ -519,11 +444,11 @@
         if (self == top) {
             window.location.href = "index.aspx";
         }
-      
 
         WebInfo = window.parent.API_GetWebInfo();
         p = window.parent.API_GetLobbyAPI();
         lang = window.parent.API_GetLang();
+        GCB = window.parent.API_GetGCB();
 
         $('head').append(`<link href="/css/Home.${lang}.css" rel="stylesheet" id="HomeCss" />`);
 
@@ -560,44 +485,8 @@
                 });
             }
         });
-
-        //setBulletinBoard();
+        
     }
-
-    /*function setBulletinBoard() {
-        var GUID = Math.uuid();
-        p.GetBulletinBoard(GUID, function (success, o) {
-            if (success) {
-                if (o.Result == 0) {
-                    var ParentMain = document.getElementById("idBulletinBoardContent");
-                    ParentMain.innerHTML = "";
-
-                      if (o.Datas.length > 0) {
-                        var RecordDom;
-                        //var numGameTotalValidBetValue = new BigNumber(0);
-                        for (var i = 0; i < o.Datas.length; i++) {
-                            var record = o.Datas[i];
-                   
-                            RecordDom = c.getTemplate("idTempBulletinBoard");
-                        
-                            var recordDate = new Date(parseInt(record.CreateDate.replace(')/', '').replace('/Date(', '')));
-                            var date = recordDate.getFullYear() + '.' + (recordDate.getMonth()+1)+'.'+recordDate.getDate();
-                            c.setClassText(RecordDom, "CreateDate", null, date);
-                            c.setClassText(RecordDom, "BulletinTitle", null, record.BulletinTitle);
-   
-   
-
-                         RecordDom.onclick =   new Function("window.parent.showMessageOK('','" + record.BulletinContent + "')");
-                               
-                           
-                            ParentMain.appendChild(RecordDom);
-           
-                        }
-                    }
-                }
-            }
-        });
-    }*/
 
     function EWinEventNotify(eventName, isDisplay, param) {
         switch (eventName) {
@@ -617,6 +506,21 @@
                 $('#HomeCss').remove();
                 $('head').append(`<link href="/css/Home.${lang}.css" rel="stylesheet" id="HomeCss" />`);
 
+                break;
+            case "RefreshPersonalFavo":
+                //var selector = "." + ("gameCode_" + param.GameCode + ".btn-like").replace(".", "\\.");
+                //$(".GameItemGroup_PersonalFavo .GameItemGroupContent").empty();
+                //if (param.IsAdded) {
+                //    $(selector).addClass("added");
+
+                //} else {
+                //    $(selector).removeClass("added");
+                //}
+
+                //createPersonal(0, false).then(function () {
+                //    setSwiperBySelector(".GameItemGroup_PersonalFavo");
+                //});
+                refreshFavGame();
                 break;
         }
     }
@@ -642,9 +546,22 @@
             orgin = "guides";
         }
 
-        orgin = "Article/" + orgin + ".html";
-
-        window.parent.API_LoadPage("Article", orgin);
+        switch (WebInfo.Lang) {
+            case "JPN":
+                orgin = "Article/" + orgin + "_jp.html";
+                break;
+            case "ENG":
+                orgin = "Article/" + orgin + "_en.html";
+                break;
+            case "CHT":
+                orgin = "Article/" + orgin + ".html";
+                break;
+            default:
+                orgin = "Article/" + orgin + ".html";
+                break;
+        }
+        window.parent.API_LoadingStart();
+        window.parent.API_LoadPage("Article", orgin + "?1");
     }
 
     function setDefaultIcon(brand, name) {
