@@ -1491,7 +1491,8 @@ i{
 .alertSearchTemp .brand {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 100%;
-  flex: 0 0 100%
+  flex: 0 0 100%;
+  /* margin-bottom: 0.4rem; */
 }
 
 .alertSearchTemp .moreInfo-item-wrapper {
@@ -1540,9 +1541,9 @@ i{
 }
 
 .alertSearchTemp .game-item-inner:hover {
-  border-color: #009FE8;
-  -webkit-box-shadow: 0px 4px 10px rgba(0, 159, 232, 0.45);
-  box-shadow: 0px 4px 10px rgba(0, 159, 232, 0.45);
+  border-color: #fd0167;
+  -webkit-box-shadow: 0px 4px 10px rgba(253, 1, 102, 0.45);
+  box-shadow: 0px 4px 10px rgba(253, 1, 102, 0.45);
   cursor: pointer
 }
 
@@ -1680,7 +1681,9 @@ i{
 }
 
 .brand-popup-list .brand-item .img-wrap img {
-  max-height: 100%
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
 }
 
 .searchFilter-wrapper {
@@ -1735,10 +1738,10 @@ i{
 
 .searchFilter-wrapper .btn-reset-popup:not(:disabled):hover {
   color: #fff;
-  /* background-color: #3db6ff;
-  border-color: #3db6ff; */
-  background-image: -webkit-gradient(linear, left top, right top, from(#A445B2), color-stop(50%, #FF0066), to(#D41872));
-    background-image: linear-gradient(to right, #A445B2 0%, #FF0066 50%, #D41872 100%);
+  background-color: #984f9d;
+  /* border-color: #3db6ff;  */
+  /* background-image: -webkit-gradient(linear, left top, right top, from(#A445B2), color-stop(50%, #FF0066), to(#D41872));
+    background-image: linear-gradient(to right, #A445B2 0%, #FF0066 50%, #D41872 100%); */
     border: solid 1px #82008b;
 }
 
@@ -1803,6 +1806,12 @@ i{
 
 }
 
+@media (min-width:768px) {
+  
+  .alertSearchTemp .game-item{
+    width: 50% !important;
+  }
+}
 @media (min-width:1200px) {
   .alertSearchTemp .modal-dialog {
     max-width: 900px
@@ -5059,7 +5068,8 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-flow: row wrap;
-  flex-flow: row wrap
+  flex-flow: row wrap;
+  height: 100%;
 }
 
 .game-item-group.list-row .game-item-img {
@@ -5098,7 +5108,13 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   align-content: space-between;
   -webkit-box-flex: 1;
   -ms-flex: 1;
-  flex: 1
+  flex: 1;
+  
+}
+
+.game-item-group.list-row .game-item-info-pre{
+  min-height: 1rem;
+  width: 100%; 
 }
 
 .game-item-group.list-row .game-item-info-indicator .action {
@@ -5139,7 +5155,8 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
 }
 
 .game-item-group.list-row .game-item-info-moreInfo .value {
-  font-size: 1rem
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 .game-item-group.list-row .game-item .moreInfo-item-wrapper {
@@ -5148,7 +5165,7 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .game-item-group.list-grid .game-item {
@@ -5183,9 +5200,9 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   content: "B";
 }
 
-@media (min-width:936px) {
+@media (min-width:768px) {
   .game-item-group.list-row .game-item {
-    width: 50%
+    /* width: 50% */
   }
 }
 
