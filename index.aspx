@@ -210,6 +210,10 @@
         return EWinWebInfo;
     }
 
+   function API_GetGCB() {
+        return GCB;
+    }
+
     function API_GetLang() {
         return EWinWebInfo.Lang;
     }

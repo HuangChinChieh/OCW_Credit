@@ -118,11 +118,13 @@ var worker = function (WebUrl, Second, eWinGameItem, Version) {
         store.createIndex('SearchKeyWord', "Tags", { unique: false, multiEntry: true }); //搜尋關鍵字使用
         store.createIndex('PersonalFavo', ['IsFavo', 'FavoTimeStamp'], { unique: false, multiEntry: false });
         store.createIndex('PersonalPlayed', ['IsPlayed', 'PlayedTimeStamp'], { unique: false, multiEntry: false });
+        store.createIndex('GameCodeClassic', ['GameCategoryCode', 'ClassicTimeStamp'], { unique: false, multiEntry: false });
         //store.createIndex('ShowTags', 'ShowTags', { unique: false, multiEntry: true }); //顯性標籤
 
         categoryStore = db.createObjectStore("GameCategory", { keyPath: ['GameBrand', 'GameCategoryCode'], autoIncrement: false });
         categoryStore.createIndex('GameBrand', 'GameBrand', { unique: false, multiEntry: false });
         categoryStore.createIndex('GameCategoryCode', 'GameCategoryCode', { unique: false, multiEntry: false });
+
         syncStore = db.createObjectStore("SyncData", { keyPath: 'SyncID', autoIncrement: false });
 
         //store.createIndex('ShowTags', 'ShowTags', { unique: false, multiEntry: true }); //顯性標籤
@@ -134,6 +136,7 @@ var worker = function (WebUrl, Second, eWinGameItem, Version) {
             categoryStore.put({
                 GameBrand: workerSelf.EWinGameItem.GameBrand,
                 GameCategoryCode: workerSelf.EWinGameItem.GameCategoryCode,
+                GameCategorySubCode: workerSelf.EWinGameItem.GameCategorySubCode
             });
         }
     }
@@ -400,13 +403,15 @@ var worker = function (WebUrl, Second, eWinGameItem, Version) {
                                 console.log("NoSyncing, SyncSuccess");
                                 workerSelf.SyncSuccess(false);
                             } else {
-
+                         
                                 let transaction = workerSelf.SyncEventData.Database.transaction(['GameCodes', 'GameCategory', 'SyncData'], 'readwrite');
                                 let objectStore = transaction.objectStore('GameCodes');
                                 let objectCategoryStore = transaction.objectStore('GameCategory');
+                           
                                 let objectSyncStore = transaction.objectStore('SyncData');
 
                                 for (var i = 0; i < o.GameCodeList.length; i++) {
+                                    var boolCheckClassicTag = false;
                                     let gameCodeItem = o.GameCodeList[i];
                                     let tags = [];
                                     let temps = gameCodeItem.GameCodeCategory;
@@ -423,8 +428,13 @@ var worker = function (WebUrl, Second, eWinGameItem, Version) {
                                                 }
                                             }
                                         }
-                                    }
+                                        if (temps[ii].CategoryName=='#精選') {
+                                            boolCheckClassicTag = true;
+                                        }
 
+                                    }
+                                    //檢查是否有經典Tag
+                                    
 
                                     //檢查目前存在的關鍵字，產生相關索引
                                     for (var ii = 0; ii < workerSelf.SyncEventData.RealSearchKeys.length; ii++) {
@@ -477,17 +487,23 @@ var worker = function (WebUrl, Second, eWinGameItem, Version) {
                                         Language: gameCodeItem.Language,
                                         RTP: gameCodeItem.RTP,
                                         FavoTimeStamp: null,
-                                        PlayedTimeStamp: null
+                                        PlayedTimeStamp: null,
+                                        ClassicTimeStamp:null
                                     };
+
+                                    if (boolCheckClassicTag) {
+                                        InsertData.ClassicTimeStamp = new Date().getTime();
+                                    }
 
 
                                     try {
                                         objectStore.put(InsertData);
+                                    
                                         objectCategoryStore.put({
                                             GameBrand: InsertData.GameBrand,
-                                            GameCategoryCode: InsertData.GameCategoryCode,
-                                            GameCategorySubCode: InsertData.GameCategorySubCode
+                                            GameCategoryCode: InsertData.GameCategoryCode
                                         });
+
 
                                         workerSelf.SyncEventData.NowGameID = gameCodeItem.GameID;
                                         workerSelf.SyncEventData.NowTimeStamp = gameCodeItem.UpdateTimestamp;

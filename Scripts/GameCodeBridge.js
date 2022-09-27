@@ -147,6 +147,94 @@
         //}
     };
 
+    this.GetGameCategoryCode = function (cb, endCb) {
+        var queue = (IndexedDB) => {
+            var transaction = IndexedDB.transaction(['GameCategory'], 'readonly');
+            var objectStore = transaction.objectStore('GameCategory');
+            var index = objectStore.index("GameCategoryCode");
+            var isDataExist = false;
+            //var count = index.count();
+
+            index.openCursor().onsuccess = function (event) {
+                var cursor = event.target.result;
+                if (cursor) {
+                    isDataExist = true;
+                    if (cb) {
+                        cb(cursor.value);
+                    }
+                    cursor.continue();
+                } else {
+                    endCb(isDataExist);
+                }
+                IndexedDB.close();
+            };
+        };
+
+        GCBSelf.InitPromise.then(getDB).then(queue);
+    };
+
+    /**
+ * 
+ * @param {any} cb
+ * @param {any} endCb
+ */
+    this.GetGameCodeClassic = function (gameCategoryCode, cb, endCb) {
+        var queue = (IndexedDB) => {
+            var transaction = IndexedDB.transaction(['GameCodes'], 'readonly');
+            var objectStore = transaction.objectStore('GameCodes');
+            var index = objectStore.index("GameCodeClassic");
+            var range = IDBKeyRange.bound([gameCategoryCode, 0], [gameCategoryCode, 2000000000000])
+            var isDataExist = false;
+
+            //var count = index.count();
+            index.openCursor(range, "prev").onsuccess = function (event) {
+                var cursor = event.target.result;
+                if (cursor) {
+                    if (cb) {
+                        if (cursor.value.GameStatus == 0) {
+                            isDataExist = true;
+                            cb(cursor.value);
+                        }
+                    }
+                    cursor.continue();
+                } else {
+                    if (endCb) {
+                        endCb(isDataExist);
+                    }
+                    IndexedDB.close();
+                }
+            };
+        };
+
+        GCBSelf.InitPromise.then(getDB).then(queue);
+    }
+
+    this.GetGameCategorySubCode = function (cb, endCb) {
+        var queue = (IndexedDB) => {
+            var transaction = IndexedDB.transaction(['GameCategoryCode'], 'readonly');
+            var objectStore = transaction.objectStore('GameCategoryCode');
+            var index = objectStore.index("GameCategoryCode");
+            var isDataExist = false;
+            //var count = index.count();
+
+            index.openCursor().onsuccess = function (event) {
+                var cursor = event.target.result;
+                if (cursor) {
+                    isDataExist = true;
+                    if (cb) {
+                        cb(cursor.value);
+                    }
+                    cursor.continue();
+                } else {
+                    endCb(isDataExist);
+                }
+                IndexedDB.close();
+            };
+        };
+
+        GCBSelf.InitPromise.then(getDB).then(queue);
+    };
+     
     /**
      * 
      * @param {any} GameBrand   遊戲廠牌
@@ -432,6 +520,8 @@
     }
 
     //#endregion 
+
+
 
     //#region Played
 
