@@ -3938,9 +3938,7 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   transition: all 0.3s ease;
   content: "C";
 }
-.game-intro-box .game-myFavorite:hover .icon-casinoworld-favorite:before {
-  content: "B";
-}
+
 .game-intro-box .game-myFavorite.add .icon-casinoworld-favorite:before {
   content: "B";
 }
@@ -5221,6 +5219,10 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
 @media (any-hover:hover) {
   .game-item-group .game-item .action .btn-like:not(.added):hover {
     color: #ff0000;
+  }
+
+  .game-intro-box .game-myFavorite:hover .icon-casinoworld-favorite:before {
+    content: "B";
   }
 }
 
