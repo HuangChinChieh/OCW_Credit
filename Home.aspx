@@ -546,9 +546,22 @@
             orgin = "guides";
         }
 
-        orgin = "Article/" + orgin + ".html";
-
-        window.parent.API_LoadPage("Article", orgin);
+        switch (WebInfo.Lang) {
+            case "JPN":
+                orgin = "Article/" + orgin + "_jp.html";
+                break;
+            case "ENG":
+                orgin = "Article/" + orgin + "_en.html";
+                break;
+            case "CHT":
+                orgin = "Article/" + orgin + ".html";
+                break;
+            default:
+                orgin = "Article/" + orgin + ".html";
+                break;
+        }
+        window.parent.API_LoadingStart();
+        window.parent.API_LoadPage("Article", orgin + "?1");
     }
 
     function setDefaultIcon(brand, name) {
