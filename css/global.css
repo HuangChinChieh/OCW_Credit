@@ -1581,6 +1581,17 @@ i{
   border-radius: 30px
 }
 
+.alertSearchTemp .form-control:focus{
+  border-color: #ff73ab;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%), 0 0 5px rgba(255, 115, 171, 0.6);
+  
+}
+
+.alertSearchTemp .custom-select:focus{
+  border-color: #ff73ab;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%), 0 0 5px rgba(255, 115, 171, 0.6);
+}
+
 .brand-wrapper {
   position: absolute;
   top: 45px;
@@ -3927,9 +3938,7 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   transition: all 0.3s ease;
   content: "C";
 }
-.game-intro-box .game-myFavorite:hover .icon-casinoworld-favorite:before {
-  content: "B";
-}
+
 .game-intro-box .game-myFavorite.add .icon-casinoworld-favorite:before {
   content: "B";
 }
@@ -5210,6 +5219,10 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
 @media (any-hover:hover) {
   .game-item-group .game-item .action .btn-like:not(.added):hover {
     color: #ff0000;
+  }
+
+  .game-intro-box .game-myFavorite:hover .icon-casinoworld-favorite:before {
+    content: "B";
   }
 }
 
