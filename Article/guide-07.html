@@ -557,6 +557,7 @@
         }
 
         function init() {
+            window.parent.API_LoadingStart();
             if (window.parent != window.top) {
                 window.location.href = "index.aspx";
             }
