@@ -444,12 +444,6 @@
         var mlp;
         var lang;
 
-        lang = window.parent.API_GetLang();
-        mlp = new multiLanguage();
-        mlp.loadLanguage(lang, function () {
-            window.parent.API_LoadingEnd();
-        });
-
         function getCookie(name) {
             var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
             return v ? v[2] : null;
@@ -510,10 +504,16 @@
         }
 
         function init() {
+            window.parent.API_LoadingStart();
             if (window.parent != window.top) {
                 window.location.href = "index.aspx";
             }
-            window.parent.API_LoadingEnd();
+
+            lang = window.parent.API_GetLang();
+            mlp = new multiLanguage();
+            mlp.loadLanguage(lang, function () {
+                window.parent.API_LoadingEnd();
+            });
         }
 
         function EWinEventNotify(eventName, isDisplay, param) {
@@ -526,7 +526,9 @@
                     break;
                 case "SetLanguage":
                     lang = param;
-                    mlp.loadLanguage(lang);
+                    mlp.loadLanguage(lang, function () {
+                        window.parent.API_LoadingEnd();
+                    });
                   
                     break;
             }
