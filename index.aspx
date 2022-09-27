@@ -205,6 +205,9 @@
     var ID = 0;
 
     //#region TOP API
+    function API_GetGCB() {
+        return GCB;
+    }
 
     function API_GetWebInfo() {
         return EWinWebInfo;
@@ -407,12 +410,12 @@
 
                 divMessageBox.querySelector(".game-myFavorite").onclick = new Function("favBtnEvent('" + gameBrand + "', '" + gameName + "')");
 
-                if (gameItem.AllowDemoPlay == 1) {
-                    divMessageBox.querySelector(".game-demo").classList.remove("is-hide");
-                    divMessageBox.querySelector(".game-demo").onclick = new Function("openDemo('" + gameBrand + "', '" + gameName + "' , '" + categ + "')");
-                } else {
-                    divMessageBox.querySelector(".game-demo").classList.add("is-hide");
-                }
+                //if (gameItem.AllowDemoPlay == 1) {
+                //    divMessageBox.querySelector(".game-demo").classList.remove("is-hide");
+                //    divMessageBox.querySelector(".game-demo").onclick = new Function("openDemo('" + gameBrand + "', '" + gameName + "' , '" + categ + "')");
+                //} else {
+                //    divMessageBox.querySelector(".game-demo").classList.add("is-hide");
+                //}
 
 
                 if (EWinWebInfo.UserLogined) {
@@ -545,6 +548,31 @@
                 }
             }
         });
+    }
+
+    function API_RefreshPersonalFavo(gameCode, isAdded) {
+        //if (!isAdded) {
+        //    var index = Favos.indexOf(gameCode);
+
+        //    if (index > -1) {
+        //        Favos.splice(index, 1);
+        //    }
+        //} else if (isAdded) {
+        //    var index = Favos.indexOf(gameCode);
+
+        //    if (index == -1) {
+        //        Favos.push(gameCode);
+        //    }
+        //}
+
+        //lobbyClient.SetUserAccountProperty(EWinWebInfo.SID, Math.uuid(), "Favo", JSON.stringify(Favos), function (success, o) {
+        //    if (success) {
+        //        if (o.Result == 0) {
+        //        }
+        //    }
+        //});
+
+        notifyWindowEvent("RefreshPersonalFavo", { GameCode: gameCode, IsAdded: isAdded });
     }
 
     //#endregion
@@ -1882,13 +1910,11 @@
                 $(btn).removeClass("added");
                 GCB.RemoveFavo(gameCode, function () {
                     window.parent.API_RefreshPersonalFavo(gameCode, false);
-                    //window.parent.API_ShowMessageOK(mlp.getLanguageKey("我的最愛"), mlp.getLanguageKey("已移除我的最愛"));
                 });
             } else {
                 $(btn).addClass("added");
                 GCB.AddFavo(gameCode, function () {
                     window.parent.API_RefreshPersonalFavo(gameCode, true);
-                    //window.parent.API_ShowMessageOK(mlp.getLanguageKey("我的最愛"), mlp.getLanguageKey("已加入我的最愛"));
                 });
             }
         } else {
@@ -1959,7 +1985,7 @@
                                         <%-- <span class="notify"><span class="notify-dot"></span></span>        --%>                              
                                         <img src="images/assets/coin-Ocoin.png" alt="">
                                     </div>
-                                    <div class="currency-info">
+                                    <div class="currency-info" style="display:none">
                                         <div class="currencyType">KRW</div>
                                     </div>
                                     <div class="balance-info">
@@ -2594,10 +2620,10 @@
                                     </div>
                                 </div>
                                 <div class="game-play">
-                                    <button type="button" class="btn-game game-demo">
+                                    <%--<button type="button" class="btn-game game-demo">
                                         <span class="language_replace">試玩</span>
                                         <div class="triangle"></div>
-                                    </button>
+                                    </button>--%>
                                     <button type="button" class="btn-primary btn-game game-login">
                                         <span class="language_replace">登入玩遊戲</span>
                                     </button>
