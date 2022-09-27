@@ -33,6 +33,7 @@
     if (self != top) {
         window.parent.API_LoadingStart();
     }
+
     var ui = new uiControl();
     var c = new common();
     var mlp;
@@ -41,7 +42,7 @@
     var p;
     var nowCateg = "All";
     var nowSubCateg = "Hot";
-    var LobbyGameList;
+    var LobbyGameList = { CategoryList: [], GameList: [], NewList: [], HotList:[]};
     var lang;
     var nowGameBrand = "All";
     var gameBrandList = [];
@@ -50,14 +51,10 @@
         window.location.href = "LoginRecover.aspx";
     }
 
-    function selGameCategory(categoryCode, subCategoryCode) {
+    function selGameCategory(categoryCode) {
         var idGameItemTitle = document.getElementById("idGameItemTitle");
-        var idGameItemSubTitle = document.getElementById("idGameItemSubTitle");
+    
         nowCateg = categoryCode;
-
-        idGameItemSubTitle.querySelectorAll('.subCateg').forEach(li => {
-            idGameItemSubTitle.removeChild(li);
-        });
 
         idGameItemTitle.querySelectorAll(".tab-item").forEach(GI => {
             GI.classList.remove("actived");
@@ -68,117 +65,42 @@
             }
         });
 
-        if (categoryCode != 'All') {
-            LobbyGameList.CategoryList.find(x => x.Categ == nowCateg).SubCategList.forEach(sc => {
-                if (sc != 'Other' && sc != 'others') {
-                    //上方tab
-                    var li = document.createElement("li");
-                    var li_a = document.createElement("a");
-                    var li_a_span = document.createElement("span");
-
-                    //上方tab
-                    li_a.appendChild(li_a_span);
-                    li.appendChild(li_a);
-                    li.classList.add("tab-item");
-                    li.classList.add("subCateg");
-                    li.classList.add("tab_" + sc);
-                    li_a.classList.add("tab-item-link");
-                    li_a_span.innerText = mlp.getLanguageKey(sc);
-
-                    li_a.onclick = new Function("selSubGameCategory('" + sc + "')");
-                    idGameItemSubTitle.appendChild(li);
-                }
-            });
-        }
-
-        selSubGameCategory(subCategoryCode);
-    }
-
-    function selSubGameCategory(subCategoryCode) {
-        var idGameItemSubTitle = document.getElementById("idGameItemSubTitle");
-
-        if (subCategoryCode) {
-            nowSubCateg = subCategoryCode;
-        } else {
-            nowSubCateg = "Hot";
-        }
-
-
-        idGameItemSubTitle.querySelectorAll(".tab-item").forEach(GI => {
-            GI.classList.remove("actived");
-
-            if (GI.classList.contains("tab_" + nowSubCateg)) {
-                GI.classList.add("actived");
-                //history.replaceState(null, null, "?" + "Category=" + categoryCode);
-                history.replaceState(null, null, "?" + "Category=" + nowCateg + "&" + "SubCategory=" + nowSubCateg);
-            }
-        });
-
-        showGame(nowCateg, nowSubCateg);
+        showGame(nowCateg);
     }
 
     function changeGameBrand() {
-        nowGameBrand = document.getElementById("idGameBrandSel").value;
-        showGame(nowCateg, nowSubCateg);
+        showGame(nowCateg);
     }
 
-    function showGame(categoryCode, subCategoryCode) {
-        var idNoGameExist = document.getElementById("idNoGameExist");
-        idNoGameExist.classList.add("is-hide");
+    function showGame(categoryCode) {
+        var idGameItemGroup = document.getElementById("idGameItemGroup");
+        idGameItemGroup.innerHTML = "";
+        GCB.GetGameCodeClassic(categoryCode,(gameItem) => {
+            var gameName = gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang) ? gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang).DisplayText : "";
+            var GI = c.getTemplate("idTemGameItem");
+            var GI_img = GI.querySelector("img");
+            var GI_a = GI.querySelector(".OpenGame");
 
-        document.querySelectorAll(".game-item").forEach(GI => {
-            var orderVal = 3;
-
-            if (subCategoryCode == 'Hot' || subCategoryCode == 'New') {
-                GI.classList.remove("is-hide");
-
-                if (categoryCode == "All") {
-
-                } else {
-                    if (!GI.classList.contains("gc_" + nowCateg)) {
-                        GI.classList.add("is-hide");
-                    }
-                }
-
-                if (GI.classList.contains("subGc_Hot") || GI.classList.contains("subGc_New")) {
-                    if (GI.classList.contains("subGc_Hot") && GI.classList.contains("subGc_New")) {
-                        orderVal = 0;
-                    } else if (GI.classList.contains("subGc_" + subCategoryCode)) {
-                        orderVal = 1;
-                    } else {
-                        orderVal = 2;
-                    }
-                }
-            } else {
-                GI.classList.add("is-hide");
-
-                if (categoryCode == "All") {
-                    if (GI.classList.contains("subGc_" + subCategoryCode)) {
-                        GI.classList.remove("is-hide");
-                    }
-                } else {
-                    if (GI.classList.contains("gc_" + nowCateg) && GI.classList.contains("subGc_" + subCategoryCode)) {
-                        GI.classList.remove("is-hide");
-                    }
-                }
+            if (GI_img != null) {
+                GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
+                GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
             }
 
-            GI.style.order = orderVal;
 
+            c.setClassText(GI, "GameCode", null, gameName);
+            c.setClassText(GI, "GameID", null, c.padLeft(gameItem.GameID.toString(), 5));
+            GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
 
-            //補上遊戲廠牌篩選
-            if (nowGameBrand == "All") {
+            idGameItemGroup.appendChild(GI);
 
+        }, () => {
+            if ($('#idGameItemGroup').children().length == 0) {
+                var idNoGameExist = document.getElementById("idNoGameExist");
+                idNoGameExist.classList.remove("is-hide");
             } else {
-                if (!GI.classList.contains("brand_" + nowGameBrand)) {
-                    GI.classList.add("is-hide");
-                }
+                idNoGameExist.classList.add("is-hide");
             }
         });
-
-        if (!document.querySelector(".game-item:not(.is-hide)")) {
-            idNoGameExist.classList.remove("is-hide");
-        }
     }
 
     function updateGameCode() {
@@ -186,145 +108,52 @@
         //var idSecContent = document.getElementById("idSecContent");
 
         var idGameItemGroup = document.getElementById("idGameItemGroup");
-        var idGameBrandSel = document.getElementById("idGameBrandSel");
+       
 
 
         idGameItemTitle.innerHTML = "";
         idGameItemGroup.innerHTML = "";
-        idGameBrandSel.innerHTML = '<option value="All">All</option>';
-        // 尋找新增
-        if (LobbyGameList) {
-            if (LobbyGameList.CategoryList) {
-                for (var i = 0; i < LobbyGameList.CategoryList.length; i++) {
-                    if (LobbyGameList.CategoryList[i].Categ != "Sports") {
-                        //上方tab
-                        var li = document.createElement("li");
-                        var li_a = document.createElement("a");
-                        var li_a_span = document.createElement("span");
-                        var li_a_i = createITag(LobbyGameList.CategoryList[i].Categ);
-                        //下方遊戲內容，全隱藏
-                        //var secGameCateg = document.createElement("section");
-
-
-                        //上方tab
-
-                        li_a.appendChild(li_a_i);
-                        li_a.appendChild(li_a_span);
-                        li.appendChild(li_a);
-                        li.classList.add("tab-item");
-                        li.classList.add("tab_" + LobbyGameList.CategoryList[i].Categ);
-                        li_a.classList.add("tab-item-link");
-                        li_a_span.innerText = mlp.getLanguageKey(LobbyGameList.CategoryList[i].Categ);
-
-                        li_a.onclick = new Function("selGameCategory('" + LobbyGameList.CategoryList[i].Categ + "')");
-                        idGameItemTitle.appendChild(li);
-
-                        //下方遊戲內容建立
-                        //secGameCateg.classList.add("game-list");
-                        //secGameCateg.classList.add("section-wrap");
-                        //secGameCateg.classList.add("sec_" + LobbyGameList.CategoryList[i].Categ);
-                        //secGameCateg.classList.add("is-hide");
-
-                        //idSecContent.appendChild(secGameCateg);
-                    }
-                }
-            }
-
-            if (LobbyGameList.GameList) {
-                LobbyGameList.GameList.forEach(gameItem => {
-                    /* 
-                      <div id="idTemGameItem" class="is-hide">
-                           <div class="game-item">
-                               <a class="game-item-link" href="#"></a>
-                               <div class="img-wrap">
-                                   <img src="../src/img/games/icon/icon-01.jpg">
-                               </div>
-                           </div>
-                       </div>
-                    */
-                    if (gameBrandList.findIndex(x => x == gameItem.GameBrand) == -1) {
-                        gameBrandList.push(gameItem.GameBrand);
-                        var opt = document.createElement("option");
-                        opt.value = gameItem.GameBrand;
-                        opt.innerText = mlp.getLanguageKey(gameItem.GameBrand);
-                        idGameBrandSel.appendChild(opt);
-                    }
-
-                    var GI = c.getTemplate("idTemGameItem");
-                    var GI_img = GI.querySelector("img");
-                    var GI_a = GI.querySelector(".OpenGame");
-
-                    if (GI_img != null) {
-                        GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
-                        GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                    }
-
-
-                    c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
-                    c.setClassText(GI, "GameID", null, c.padLeft(gameItem.GameID.toString(), 5));
-                    GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                    GI.classList.add("is-hide");
-                    GI.classList.add("gc_" + gameItem.Categ);
-                    GI.classList.add("subGc_" + gameItem.SubCateg);
-                    GI.classList.add("brand_" + gameItem.GameBrand);
-
-                    if (gameItem.IsHot == 1) {
-                        GI.classList.add("subGc_Hot");
-                        GI.classList.add("label-hot");
-                    }
-
-                    if (gameItem.IsNew == 1) {
-                        GI.classList.add("subGc_New");
-                        GI.classList.add("label-new");
-                    }
-
-                    idGameItemGroup.appendChild(GI);
-
-                });
-            }
-        }
-    }
-
-    function updateBaseInfo() {
-        //LobbyGameList = window.parent.API_GetGameList();
-        //updateGameCode();
-        //selGameCategory(nowCateg);
-    }
-
-    function createGameListData() {
-        LobbyGameList = {};
-        var CategoryList = [];
     
+        // 尋找新增
+        var CategoryList = [];
         GCB.GetGameCategoryCode((categoryCodeItem) => {
-           var BrandCode = categoryCodeItem.GameBrand;
-           var BrandCateg = categoryCodeItem.GameCategoryCode;
-           var GameCategorySubCode = categoryCodeItem.GameCategorySubCode;
-            var index = CategoryList.findIndex(c => c.Categ == BrandCateg);
-            if (index == -1) {
-                var category = {
-                    Categ: BrandCateg,
-                    SubCategList: [GameCategorySubCode]
-                };
+            var BrandCateg = categoryCodeItem.GameCategoryCode;
+      
+            if (!CategoryList.includes(BrandCateg)) {
+                CategoryList.push(BrandCateg);
+                var li = document.createElement("li");
+                var li_a = document.createElement("a");
+                var li_a_span = document.createElement("span");
+                var li_a_i = createITag(BrandCateg);
+                //下方遊戲內容，全隱藏
+                //var secGameCateg = document.createElement("section");
 
-                CategoryList.push(category);
-            } else {
-         
-                var subCategList = CategoryList[index].SubCategList;
-                if (!subCategList.includes(GameCategorySubCode)) {
-                    subCategList.push(GameCategorySubCode);
-                    CategoryList[index].SubCategList = subCategList;
-                };
 
+                //上方tab
+
+                li_a.appendChild(li_a_i);
+                li_a.appendChild(li_a_span);
+                li.appendChild(li_a);
+                li.classList.add("tab-item");
+                li.classList.add("tab_" + BrandCateg);
+                li_a.classList.add("tab-item-link");
+                li_a_span.innerText = mlp.getLanguageKey(BrandCateg);
+
+                li_a.onclick = new Function("selGameCategory('" + BrandCateg + "')");
+                idGameItemTitle.appendChild(li);
             }
+          
         }, () => {
-            LobbyGameList.CategoryList = CategoryList;
-        });
+            selGameCategory('Electron');
+        })
+
     }
 
     function init() {
         if (self == top) {
             window.location.href = "index.aspx";
         }
+
         GCB = window.parent.API_GetGCB();
         WebInfo = window.parent.API_GetWebInfo();
         p = window.parent.API_GetLobbyAPI();
@@ -332,7 +161,7 @@
         nowSubCateg = c.getParameter("SubCategory");
         lang = window.parent.API_GetLang();
 
-        createGameListData();
+        //createGameListData();
 
         if (WebInfo.IsOpenGame) {
             WebInfo.IsOpenGame = false;
@@ -351,10 +180,8 @@
         mlp.loadLanguage(lang, function () {
             window.parent.API_LoadingEnd();
             if ((WebInfo.SID != null)) {
-                updateBaseInfo()
-                LobbyGameList = window.parent.API_GetGameList();
                 updateGameCode();
-                selGameCategory(nowCateg, nowSubCateg);
+                //selGameCategory(nowCateg, nowSubCateg);
             } else {
                 loginRecover();
             }
@@ -448,7 +275,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="menu-wrap menu-wrap-sub">
+               <%-- <div class="menu-wrap menu-wrap-sub">
                     <div class="menu-container">
                         <ul id="idGameItemSubTitle" class="tab-menu menu-sub">
                             <li class="tab-item tab_Hot">
@@ -469,7 +296,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div>--%>
             </section>
 
             <!-- 遊戲列表 -->
