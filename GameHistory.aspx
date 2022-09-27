@@ -247,14 +247,15 @@
         mlp = new multiLanguage(v);
         mlp.loadLanguage(lang, function () {
             window.parent.API_LoadingEnd();
-            updateBaseInfo()
+            //updateBaseInfo()
+            setSearchDate(0);
         });
 
         // dropdown-selector
         $('[data-click-btn="toggle-dropdown"]').click(function () {
             $(this).parent().toggleClass('cur');
         });
-        
+
         var wallet = WebInfo.UserInfo.WalletList.find(x => x.CurrencyType.toLocaleUpperCase() == WebInfo.MainCurrencyType);
 
         document.getElementById("idWalletAmount").innerText = new BigNumber(wallet.PointValue).toFormat();
