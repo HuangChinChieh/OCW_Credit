@@ -561,7 +561,7 @@
                 break;
         }
         window.parent.API_LoadingStart();
-        window.parent.API_LoadPage("Article", orgin + "?1");
+        window.parent.API_LoadPage("Article", orgin + "?2");
     }
 
     function setDefaultIcon(brand, name) {

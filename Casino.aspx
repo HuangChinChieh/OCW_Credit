@@ -79,7 +79,7 @@
     function showGame(categoryCode) {
         var idGameItemGroup = document.getElementById("idGameItemGroup");
         idGameItemGroup.innerHTML = "";
-        GCB.GetGameCodeClassic(categoryCode,(gameItem) => {
+        GCB.GetGameCodeClassic(categoryCode, (gameItem) => {
             var gameName = gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang) ? gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang).DisplayText : "";
             var GI = c.getTemplate("idTemGameItem");
             var GI_img = GI.querySelector("img");
@@ -98,8 +98,8 @@
             idGameItemGroup.appendChild(GI);
 
         }, () => {
+            var idNoGameExist = document.getElementById("idNoGameExist");
             if ($('#idGameItemGroup').children().length == 0) {
-                var idNoGameExist = document.getElementById("idNoGameExist");
                 idNoGameExist.classList.remove("is-hide");
             } else {
                 idNoGameExist.classList.add("is-hide");
