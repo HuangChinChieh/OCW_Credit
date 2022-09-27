@@ -2412,7 +2412,7 @@
                                 <label for="" class="form-label"><span class="language_replace">キーワード</span></label> -->
                                 <label class="form-title language_replace">キーワード</label>
                                 <div class="input-group">
-                                    <input id="alertSearchKeyWord" type="text" class="form-control" language_replace="placeholder" placeholder="キーワード" enterkeyhint="">
+                                    <input id="alertSearchKeyWord" type="text" class="form-control" language_replace="placeholder" placeholder="" enterkeyhint="">
                                 </div>
                             </div>
                             <div class="wrapper_center action-outter">

@@ -1581,6 +1581,17 @@ i{
   border-radius: 30px
 }
 
+.alertSearchTemp .form-control:focus{
+  border-color: #ff73ab;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%), 0 0 5px rgba(255, 115, 171, 0.6);
+  
+}
+
+.alertSearchTemp .custom-select:focus{
+  border-color: #ff73ab;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%), 0 0 5px rgba(255, 115, 171, 0.6);
+}
+
 .brand-wrapper {
   position: absolute;
   top: 45px;
