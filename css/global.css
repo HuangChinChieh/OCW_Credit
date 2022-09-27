@@ -3942,9 +3942,7 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
 .game-intro-box .game-myFavorite.add .icon-casinoworld-favorite:before {
   content: "B";
 }
-.game-intro-box .game-myFavorite.add:hover .icon-casinoworld-favorite:before {
-  content: "C";
-}
+
 .game-intro-box .myFavorite-icon {
   font-size: 1.125rem;
 }
@@ -5223,6 +5221,10 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
 
   .game-intro-box .game-myFavorite:hover .icon-casinoworld-favorite:before {
     content: "B";
+  }
+
+  .game-intro-box .game-myFavorite.add:hover .icon-casinoworld-favorite:before {
+    content: "C";
   }
 }
 

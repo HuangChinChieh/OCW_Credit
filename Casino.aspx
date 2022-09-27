@@ -2,6 +2,10 @@
 
 <%
     string Version = EWinWeb.Version;
+    string Category = "";
+
+       if (string.IsNullOrEmpty(Request["Category"]) == false)
+        Category = Request["Category"];
 %>
 <!doctype html>
 <html>
@@ -40,7 +44,7 @@
     var sumask;
     var Webinfo;
     var p;
-    var nowCateg = "All";
+    var nowCateg = "<%=Category%>";
     var nowSubCateg = "Hot";
     var LobbyGameList = { CategoryList: [], GameList: [], NewList: [], HotList:[]};
     var lang;
@@ -144,7 +148,7 @@
             }
           
         }, () => {
-            selGameCategory('Electron');
+            selGameCategory(nowCateg);
         })
 
     }
@@ -157,8 +161,6 @@
         GCB = window.parent.API_GetGCB();
         WebInfo = window.parent.API_GetWebInfo();
         p = window.parent.API_GetLobbyAPI();
-        nowCateg = c.getParameter("Category");
-        nowSubCateg = c.getParameter("SubCategory");
         lang = window.parent.API_GetLang();
 
         //createGameListData();
@@ -169,16 +171,16 @@
         }
 
         if (nowCateg == undefined || nowCateg == "") {
-            nowCateg = "All";
+            nowCateg = "Electron";
         }
 
-        if (nowSubCateg == undefined || nowSubCateg == "") {
-            nowSubCateg = "Hot";
-        }
-
+   
         mlp = new multiLanguage(v);
         mlp.loadLanguage(lang, function () {
+            GCB.InitPromise.then(() => {
             window.parent.API_LoadingEnd();
+            });
+      
             if ((WebInfo.SID != null)) {
                 updateGameCode();
                 //selGameCategory(nowCateg, nowSubCateg);
