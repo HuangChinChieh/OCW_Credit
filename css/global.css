@@ -2119,12 +2119,14 @@ i{
           align-items: center;
   color: rgba(44, 45, 58, 0.6);
 }
+
 .footer-inner .footer-wrapper {
   max-width: 1000px;
   padding: 0 10px;
   margin: 0 auto;
 }
-.footer-inner .partner {
+/* 舊的 partner ==================*/
+/* .footer-inner .partner {
   display: none;
   width: 100%;
 }
@@ -2138,7 +2140,65 @@ i{
 }
 .footer-inner .partner .logo-item img {
   width: 100%;
+} */
+/* 舊的 partner ==================*/
+
+.footer-inner .partner {
+  width: 100%;
+  margin: 20px 0
 }
+
+.footer-inner .partner .logo-item {
+  width: 25%;
+  padding: 0 15px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center
+}
+
+.footer-inner .partner .logo-item .img-crop {
+  max-width: 65px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+
+.footer-inner .partner .logo-item img {
+  width: 100%;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%)
+}
+
+.footer-inner .partner .logo-item:hover img {
+  -webkit-filter: unset;
+  filter: unset
+}
+
+@media (min-width:375px) {
+  .footer-inner .partner .logo-item {
+    width: 20%
+  }
+}
+
+@media (min-width:640px) {
+  .footer-inner .partner .logo-item {
+    width: 12.5%
+  }
+}
+
+@media (min-width:1144px) {
+  .footer-inner .partner .logo-item {
+    width: 10%
+  }
+}
+
+
 .footer-inner .company-info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4333,9 +4393,13 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   }
 }
 @media only screen and (min-width: 768px) {
-  .footer-inner .partner {
+
+  /* 舊的 partner ==================*/
+  /* .footer-inner .partner {
     width: 45%;
-  }
+  } */
+  /* 舊的 partner END================*/
+
   .footer-inner .company-info {
     width: 100%;
     font-size: 0.875rem;
