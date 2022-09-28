@@ -1934,6 +1934,7 @@
                 });
             }
         } else {
+            $('#alertGameIntro').modal('hide');
             showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
                 API_LoadPage("Login", "Login.aspx");
             }, null);
