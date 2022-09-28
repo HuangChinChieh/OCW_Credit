@@ -141,17 +141,14 @@
 <% } %>
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="Scripts/OutSrc/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+<%--<script src="Scripts/OutSrc/lib/bootstrap/js/bootstrap.bundle.min.js"></script>--%>
 <script src="Scripts/OutSrc/js/script.js"></script>
 <script type="text/javascript" src="/Scripts/Common.js?<%:Version%>"></script>
 <script type="text/javascript" src="/Scripts/UIControl.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <%--<script type="text/javascript" src="<%=EWinWeb.EWinUrl %>/Scripts/jquery.min.1.7.js"></script>--%>
-<script
-    src="https://code.jquery.com/jquery-2.2.4.js"
-    integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-    crossorigin="anonymous"></script>
 <script type="text/javascript" src="/Scripts/PaymentAPI.js?<%:Version%>""></script>
 <script type="text/javascript" src="/Scripts/LobbyAPI.js?<%:Version%>""></script>
 <script type="text/javascript" src="/Scripts/GameCodeBridge.js?1"></script>
@@ -232,6 +229,10 @@
 
     function API_GetCurrency() {
         return selectedCurrency;
+    }
+
+    function API_SearchGameByGameCategory(gameCategory) {
+        return SearchControll.searchGameByGameCategory(gameCategory);
     }
 
     function API_GetGameLang(type, gameBrand, gameName) {
@@ -651,6 +652,7 @@
             if (divMessageBox != null) {
                 messageModal.toggle();
 
+
                 if (divMessageBoxCloseButton != null) {
                     // divMessageBoxCloseButton.style.display = "inline";
                     divMessageBoxCloseButton.classList.remove("is-hide");
@@ -774,7 +776,7 @@
                 GameInfoModal.hide();
                 modal.show();
 
-                if (divMessageBoxCloseButton != null) {
+                if (cbCancel != null && divMessageBoxCloseButton != null) {
                     // divMessageBoxCloseButton.style.display = "inline";
                     divMessageBoxCloseButton.classList.remove("is-hide");
                     divMessageBoxCloseButton.onclick = function () {
@@ -784,6 +786,8 @@
                             cbCancel();
                         }
                     }
+                } else {
+                    divMessageBoxCloseButton.classList.add("is-hide");
                 }
 
                 if (divMessageBoxOKButton != null) {
@@ -868,6 +872,7 @@
     }
 
     function openGame(gameBrand, gameName, categ) {
+
         var alertSearch = $("#alertSearch");
 
         if (alertSearch.css("display") == "block") {
@@ -930,12 +935,11 @@
 
     //FavoriteGame
     function favBtnEvent(gameBrand, gameName) {
+
+        event.stopPropagation();
         if (EWinWebInfo.UserLogined) {
             var btn = event.currentTarget;
             var gameCode = gameBrand + "." + gameName;
-
-            event.stopPropagation();
-
             if ($(btn).hasClass("add")) {
                 $(btn).removeClass("add");
                 GCB.RemoveFavo(gameCode, function () {
@@ -961,10 +965,11 @@
     };
 
     function favBtnClick(gameCode) {
+      
+        event.stopPropagation();
         if (EWinWebInfo.UserLogined) {
             var btn = event.currentTarget;
-            event.stopPropagation();
-
+       
             if ($(btn).hasClass("added")) {
                 $(btn).removeClass("added");
                 GCB.RemoveFavo(gameCode, function () {
@@ -977,6 +982,11 @@
                 });
             }
         } else {
+            var alertSearch = $("#alertSearch");
+
+            if (alertSearch.css("display") == "block") {
+                alertSearchCloseButton.click();
+            }
             var closebtn = $('#alertGameIntroCloseBtn');
             if (closebtn.length > 0) {
                 closebtn.trigger('click');
@@ -1848,6 +1858,33 @@
                 }
             }
 
+
+            SearchDom.find("#seleGameCategory").empty();
+            o = new Option(mlp.getLanguageKey("全部"), "All");
+            SearchDom.find("#seleGameCategory").append(o);
+            SearchDom.find("#seleGameCategory").val("All");
+
+            if (gameCategoryName) {
+                o = new Option(mlp.getLanguageKey(gameCategoryName), gameCategoryName);
+                SearchDom.find("#seleGameCategory").append(o);
+                SearchDom.find("#seleGameCategory").val(gameCategoryName);
+            }
+
+            SearchDom.find('#alertSearchKeyWord').val('');
+
+            SearchSelf.searchGameList();
+
+        }
+
+        this.searchGameByGameCategory = function (gameCategoryName) {
+            //待修正
+            let o;
+
+            SearchDom.modal('show');
+            SearchDom.find("#div_SearchGameCategory").show();
+            SearchDom.find("input[name='button-brandExchange']").each(function (e, v) {
+                $(v).prop("checked", false);
+            });
 
             SearchDom.find("#seleGameCategory").empty();
             o = new Option(mlp.getLanguageKey("全部"), "All");
