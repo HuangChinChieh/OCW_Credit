@@ -651,6 +651,7 @@
             if (divMessageBox != null) {
                 messageModal.toggle();
 
+
                 if (divMessageBoxCloseButton != null) {
                     // divMessageBoxCloseButton.style.display = "inline";
                     divMessageBoxCloseButton.classList.remove("is-hide");
@@ -774,7 +775,7 @@
                 GameInfoModal.hide();
                 modal.show();
 
-                if (divMessageBoxCloseButton != null) {
+                if (cbCancel != null && divMessageBoxCloseButton != null) {
                     // divMessageBoxCloseButton.style.display = "inline";
                     divMessageBoxCloseButton.classList.remove("is-hide");
                     divMessageBoxCloseButton.onclick = function () {
@@ -784,6 +785,8 @@
                             cbCancel();
                         }
                     }
+                } else {
+                    divMessageBoxCloseButton.classList.add("is-hide");
                 }
 
                 if (divMessageBoxOKButton != null) {
@@ -868,6 +871,7 @@
     }
 
     function openGame(gameBrand, gameName, categ) {
+
         var alertSearch = $("#alertSearch");
 
         if (alertSearch.css("display") == "block") {
@@ -930,12 +934,11 @@
 
     //FavoriteGame
     function favBtnEvent(gameBrand, gameName) {
+
+        event.stopPropagation();
         if (EWinWebInfo.UserLogined) {
             var btn = event.currentTarget;
             var gameCode = gameBrand + "." + gameName;
-
-            event.stopPropagation();
-
             if ($(btn).hasClass("add")) {
                 $(btn).removeClass("add");
                 GCB.RemoveFavo(gameCode, function () {
@@ -961,10 +964,11 @@
     };
 
     function favBtnClick(gameCode) {
+      
+        event.stopPropagation();
         if (EWinWebInfo.UserLogined) {
             var btn = event.currentTarget;
-            event.stopPropagation();
-
+       
             if ($(btn).hasClass("added")) {
                 $(btn).removeClass("added");
                 GCB.RemoveFavo(gameCode, function () {
@@ -977,6 +981,11 @@
                 });
             }
         } else {
+            var alertSearch = $("#alertSearch");
+
+            if (alertSearch.css("display") == "block") {
+                alertSearchCloseButton.click();
+            }
             var closebtn = $('#alertGameIntroCloseBtn');
             if (closebtn.length > 0) {
                 closebtn.trigger('click');
