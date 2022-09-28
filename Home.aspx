@@ -140,32 +140,50 @@
         {
             GameName: "EWinGaming",
             GameBrand: "EWin",
-            Description: "FourGamesDescription01"
+            GameNameCHT: "真人百家樂(eWIN)",
+            GameNameJP: "EWinゲーミング",
+            Description: "真人即時視訊，公平公正百家樂!",
+            DescriptionJP: "ライブバカラの元祖。撮影スタジオを使わずに本当のカジノのV I Pルームを撮影したライブ映"
         },
         {
-            GameName: "32",
-            GameBrand: "KGS",
-            Description: "FourGamesDescription02"
+            GameName: "14",
+            GameBrand: "BNG",
+            GameNameCHT: "快樂鳥",
+            GameNameJP: "15個ゴールデン卵",
+            Description: "一起見證金蛋帶來的財富吧！",
+            DescriptionJP: "ゴールデン卵が富をもたらしますよ！"
         },
         {
-            GameName: "1",
-            GameBrand: "PG",
-            Description: "FourGamesDescription03"
+            GameName: "168",
+            GameBrand: "BNG",
+            GameNameCHT: "錢滾滾聖甲蟲",
+            GameNameJP: "金招きスカラベ",
+            Description: "擁抱聖甲蟲的奇幻魅力！",
+            DescriptionJP: "スカラベの神秘感に魅了されましょう！"
         },
         {
-            GameName: "7",
-            GameBrand: "PG",
-            Description: "FourGamesDescription04"
+            GameName: "202",
+            GameBrand: "BNG",
+            GameNameCHT: "太陽神殿2 - 集鴻運",
+            GameNameJP: "エジプトの太陽2",
+            Description: "捕獲熾熱的太陽，帶給你無窮能量！",
+            DescriptionJP: "熱く燃える太陽を捕まえ、無限なエナジーを手に入れましょう！"
         },
         {
             GameName: "TaikoDrumMasterEX",
             GameBrand: "CG",
-            Description: "FourGamesDescription05"
+            GameNameCHT: "新 太鼓達人",
+            GameNameJP: "太鼓の達人",
+            Description: "復古!好玩!跟著節奏旋轉起來吧~~",
+            DescriptionJP: "レトロで面白い！テンプルに合わせて回しましょう～"
         },
         {
             GameName: "LineBrownDaydreamEX",
             GameBrand: "CG",
-            Description:"FourGamesDescription06"
+            GameNameCHT: "新 愛做夢的熊大",
+            GameNameJP: "新 夢好きのブラウン",
+            Description: "最受歡迎的熊大，靠著天生直覺解決問題，一起來目擊他的聰明才智吧!",
+            DescriptionJP: "人気のブラウン君はいつも直感で問題を解決していく。彼の賢さを見てみましょう！"
         }
     ];
 
@@ -245,14 +263,23 @@
         tempGI = document.getElementById("idRecommend" + (index + 1));
         tempGI_img = tempGI.querySelector("img");
         tempGI_a = tempGI.querySelector("a");
-
+        debugger
         if (tempGI_img != null) {
             tempGI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + temp_gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + temp_gameItem.GameName + ".png";
             tempGI_img.onerror = new Function("setDefaultIcon('" + temp_gameItem.GameBrand + "', '" + temp_gameItem.GameName + "')");
         }
 
-        c.setClassText(tempGI, "gameName", null, window.parent.API_GetGameLang(1, temp_gameItem.GameBrand, temp_gameItem.GameName));
-        c.setClassText(tempGI, "gameDescription", null, mlp.getLanguageKey(temp_gameItem.Description));
+        switch (WebInfo.Lang) {
+            case "JPN":
+                c.setClassText(tempGI, "gameName", null, temp_gameItem.GameNameJP);
+                c.setClassText(tempGI, "gameDescription", null, temp_gameItem.DescriptionJP);
+                break;
+            default:
+                c.setClassText(tempGI, "gameName", null, temp_gameItem.GameNameCHT);
+                c.setClassText(tempGI, "gameDescription", null, temp_gameItem.Description);
+                break;
+        }
+
         tempGI_a.onclick = new Function("window.parent.API_OpenGameCode('" + temp_gameItem.GameBrand + "', '" + temp_gameItem.GameName + "')");
     }
 

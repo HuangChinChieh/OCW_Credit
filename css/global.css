@@ -393,6 +393,21 @@ button {
   width: 100%;
 }
 
+.btn-outline-main{
+  color: #82008b;
+  border: solid 1px #82008b;
+  background-color: #ffffff;
+  border-radius: 50px;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-outline-main:not(:disabled):hover {
+  color: #fff;
+  background-color: #984f9d;
+  border: solid 1px #82008b;
+}
+
 .btn-icon-custom {
   font-family: inherit !important;
   display: -webkit-inline-box !important;
@@ -1743,8 +1758,9 @@ i{
   border: solid 1px #009FE8; */
   color: #82008b;
   border: solid 1px #82008b;
-  -webkit-transition: background-image 0.3s ease-in-out;
-  transition: background-image 0.3s ease-in-out;
+  background-color: #ffffff;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .searchFilter-wrapper .btn-reset-popup:not(:disabled):hover {
