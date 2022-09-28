@@ -306,6 +306,13 @@
                 <div class="page-content">
                     <div id="idGameItemGroup" class="game-item-group">
                     </div>
+                    <!-- <button type="button" class="btn btn btn-outline-main btn-sm btn-reset-popup" onclick="">
+                        <span class="language_replace">もっと見る</span>
+                    </button> -->
+                    <div class="wrapper_center wrapper-btnmore">
+                        <button class="btn btn btn-outline-main" type="button" onclick=""><span class="language_replace">もっと見る</span>
+                        </button>
+                    </div>
                     <div id="idNoGameExist" class="is-hide">
                         <span class="language_replace">搜尋不到相關遊戲，請重設分類與廠牌</span>
                     </div>
