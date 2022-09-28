@@ -2056,8 +2056,8 @@
                             <img class="GameLogo" src="" alt=""></div>
                     </div>
                     <span class="GameName"></span>
-					<div class="gameClodeBtn btn btn-primary btn-sm" onclick="API_LoadPage('Home','Home.aspx')"><span class="language_replace">關閉遊戲</span></div>
                 </div>
+                <div class="gameClodeBtn btn btn-primary btn-sm" onclick="API_LoadPage('Home','Home.aspx')"><span class="language_replace">關閉遊戲</span></div>
                 <div class="header-tool" style="display: none;">
                 </div>
             </div>
