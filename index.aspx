@@ -948,12 +948,45 @@
                 });
             }
         } else {
+            var closebtn = $('#alertGameIntroCloseBtn');
+            if (closebtn.length>0) {
+                closebtn.trigger('click');
+            }
+   
             showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
                 API_LoadPage("Login", "Login.aspx");
             }, null);
         }
 
     };
+
+    function favBtnClick(gameCode) {
+        if (EWinWebInfo.UserLogined) {
+            var btn = event.currentTarget;
+            event.stopPropagation();
+
+            if ($(btn).hasClass("added")) {
+                $(btn).removeClass("added");
+                GCB.RemoveFavo(gameCode, function () {
+                    window.parent.API_RefreshPersonalFavo(gameCode, false);
+                });
+            } else {
+                $(btn).addClass("added");
+                GCB.AddFavo(gameCode, function () {
+                    window.parent.API_RefreshPersonalFavo(gameCode, true);
+                });
+            }
+        } else {
+            var closebtn = $('#alertGameIntroCloseBtn');
+            if (closebtn.length > 0) {
+                closebtn.trigger('click');
+            }
+            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
+                API_LoadPage("Login", "Login.aspx");
+            }, null);
+        }
+
+    }
 
     function getCompanyGameCategoryCode() {
         GCB.GetGameCategoryCode((categoryCodeItem) => {
@@ -1836,15 +1869,20 @@
         //openFullSearch
         this.openFullSearch = function (e) {
             var header_SearchFull = document.getElementById("header_SearchFull");
-            header_SearchFull.classList.add("open");
+            if (header_SearchFull!=null) {
+                header_SearchFull.classList.add("open");
+            }
+          
         }
 
         //openFullSearch
         this.closeFullSearch = function (e) {
             var header_SearchFull = document.getElementById("header_SearchFull");
 
-            if (header_SearchFull.classList.contains("open")) {
-                header_SearchFull.classList.remove("open");
+            if (header_SearchFull != null) {
+                if (header_SearchFull.classList.contains("open")) {
+                    header_SearchFull.classList.remove("open");
+                }
             }
         }
 
@@ -1917,29 +1955,7 @@
 
     //#endregion
 
-        function favBtnClick(gameCode) {
-        if (EWinWebInfo.UserLogined) {
-            var btn = event.currentTarget;
-            event.stopPropagation();
 
-            if ($(btn).hasClass("added")) {
-                $(btn).removeClass("added");
-                GCB.RemoveFavo(gameCode, function () {
-                    window.parent.API_RefreshPersonalFavo(gameCode, false);
-                });
-            } else {
-                $(btn).addClass("added");
-                GCB.AddFavo(gameCode, function () {
-                    window.parent.API_RefreshPersonalFavo(gameCode, true);
-                });
-            }
-        } else {
-            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請先登入"), function () {
-                API_LoadPage("Login", "Login.aspx");
-            }, null);
-        }
-
-    }
 
     function setFavoriteGame(gameCode) {
         var favoriteGames = [];
@@ -2055,8 +2071,8 @@
                             <img class="GameLogo" src="" alt=""></div>
                     </div>
                     <span class="GameName"></span>
-					<div class="gameClodeBtn btn btn-primary btn-sm" onclick="API_LoadPage('Home','Home.aspx')"><span class="language_replace">關閉遊戲</span></div>
                 </div>
+                <div class="gameClodeBtn btn btn-primary btn-sm" onclick="API_LoadPage('Home','Home.aspx')"><span class="language_replace">關閉遊戲</span></div>
                 <div class="header-tool" style="display: none;">
                 </div>
             </div>
@@ -2602,7 +2618,7 @@
             <div class="modal-content">
                 <div class="modal-header border-bottom">
                     <h5 class="modal-title gameRealName language_replace"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="alertGameIntroCloseBtn">
                         <span aria-hidden="true"><i class="icon-close-small"></i></span>
                     </button>
                 </div>

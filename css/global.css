@@ -5224,7 +5224,7 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
   }
 
   .game-intro-box .game-myFavorite.add:hover .icon-casinoworld-favorite:before {
-    content: "C";
+    /* content: "C"; */
   }
 }
 
