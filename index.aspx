@@ -2332,6 +2332,26 @@
         <footer class="footer-container">
             <div class="footer-inner">
                 <div class="container">
+                    <ul class="company-info">
+                        <li class="info-item ">
+                            <a onclick="window.parent.API_LoadPage('About','About.html')"><span class="language_replace">關於我們</span></a>
+                        </li>
+                        <!-- <li class="info-item ">
+                            <a onclick="location.href='https://game.ewin-soft.com/GetDownloadLink.aspx?Tag=X07TATY8';"><span class="language_replace">下載代理工具</span></a>
+                        </li> -->
+                        <!--li class="info-item">
+                            <a onclick="window.parent.API_ShowContactUs()"><span class="language_replace">聯絡客服</span></a>
+                        </li>
+                        <li class="info-item ">
+                            <a onclick="window.parent.API_ShowPartialHtml('', 'Rules', true, null)"><span class="language_replace">利用規約</span></a>
+                        </li>
+                        <li class="info-item ">
+                            <a onclick="window.parent.API_ShowPartialHtml('', 'PrivacyPolicy', true, null)"><span class="language_replace">隱私權政策</span></a>
+                        </li>
+                        <li class="info-item ">
+                            <a onclick="window.parent.API_OpenHotArticle()"><span class="language_replace">熱門文章</span></a>
+                        </li-->
+                    </ul>
                     <%--<div class="partner">
                         <div class="logo">
                             <div class="row">
@@ -2485,40 +2505,22 @@
                                         <img src="/images/logo/footer/logo-va.png" alt="">
                                     </div>
                                 </div>
+                                --%>
+                                
                             </div>
                         </div>
-                        --%>
                     </div>
-                </div>
-                
-                <ul class="company-info">
-                    <li class="info-item ">
-                        <a onclick="window.parent.API_LoadPage('About','About.html')"><span class="language_replace">關於我們</span></a>
-                    </li>
-					<!-- <li class="info-item ">
-                        <a onclick="location.href='https://game.ewin-soft.com/GetDownloadLink.aspx?Tag=X07TATY8';"><span class="language_replace">下載代理工具</span></a>
-                    </li> -->
-                    <!--li class="info-item">
-                        <a onclick="window.parent.API_ShowContactUs()"><span class="language_replace">聯絡客服</span></a>
-                    </li>
-                    <li class="info-item ">
-                        <a onclick="window.parent.API_ShowPartialHtml('', 'Rules', true, null)"><span class="language_replace">利用規約</span></a>
-                    </li>
-                    <li class="info-item ">
-                        <a onclick="window.parent.API_ShowPartialHtml('', 'PrivacyPolicy', true, null)"><span class="language_replace">隱私權政策</span></a>
-                    </li>
-                    <li class="info-item ">
-                        <a onclick="window.parent.API_OpenHotArticle()"><span class="language_replace">熱門文章</span></a>
-                    </li-->
-                </ul>
-                <div class="company-address">
-                    <p class="name">The Orange Crest Limited</p>
-                    <p class="address">Sino Centre, 582-592 Nathan Rd., Mongkok, Kowloon, Hong Kong.</p>
-                </div>
-                <div class="footer-copyright">
-                    <p>Copyright © 2022 paradise. All Rights Reserved.</p>
-                </div>
+
+                    <div class="company-address">
+                        <p class="name">The Orange Crest Limited</p>
+                        <p class="address">Sino Centre, 582-592 Nathan Rd., Mongkok, Kowloon, Hong Kong.</p>
+                    </div>
+                    <div class="footer-copyright">
+                        <p>Copyright © 2022 paradise. All Rights Reserved.</p>
+                    </div>
+                </div>      
             </div>
+
         </footer>
     </div>
     <!--alert-->
