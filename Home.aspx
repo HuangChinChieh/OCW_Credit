@@ -1528,7 +1528,7 @@
         </main>
         <!-- footer -->
         <!-- 合作夥伴 -->
-        <section class="partner">
+        <section class="partner" style="display: none;">
             <!-- <div class="container-fluid"> -->
             <div class="page-content">
                 <div class="sec-title-container">

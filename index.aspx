@@ -2294,47 +2294,166 @@
     <div id="footer" class="is-hide">
         <footer class="footer-container">
             <div class="footer-inner">
-                <div class="partner">
-                    <div class="logo">
-                        <div class="row">
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-PG.png" alt="">
+                <div class="container">
+                    <%--<div class="partner">
+                        <div class="logo">
+                            <div class="row">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-PG.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-CG.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-CG.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-PP.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-PP.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-BG.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-BG.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-VA.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-VA.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-BNG.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-BNG.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-pagcor.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-pagcor.png" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div> 
+                    --%>
+                    <div class="partner">
+                        <div class="logo">
+                            <div class="row">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-eWIN.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-play.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-evo.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-cg.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-bco.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-cq9.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-red-tiger.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-microgaming.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-playngo.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-h.png" alt="">
+                                    </div>
+                                </div>
+                                
+                                
+                                <%--
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-kgs.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-bbin.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-gmw.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-pg.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-netent.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-kx.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-evops.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-bti.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-zeus.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-biggaming.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-va.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        --%>
                     </div>
                 </div>
+                
                 <ul class="company-info">
                     <li class="info-item ">
                         <a onclick="window.parent.API_LoadPage('About','About.html')"><span class="language_replace">關於我們</span></a>
@@ -2354,8 +2473,6 @@
                     <li class="info-item ">
                         <a onclick="window.parent.API_OpenHotArticle()"><span class="language_replace">熱門文章</span></a>
                     </li-->
-
-
                 </ul>
                 <div class="company-address">
                     <p class="name">The Orange Crest Limited</p>
