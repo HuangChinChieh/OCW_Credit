@@ -2510,16 +2510,14 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="company-address">
-                        <p class="name">The Orange Crest Limited</p>
-                        <p class="address">Sino Centre, 582-592 Nathan Rd., Mongkok, Kowloon, Hong Kong.</p>
-                    </div>
-                    <div class="footer-copyright">
-                        <p>Copyright © 2022 paradise. All Rights Reserved.</p>
-                    </div>
-
-                </div>      
+                </div>   
+                <div class="company-address">
+                    <p class="name">The Orange Crest Limited</p>
+                    <p class="address">Sino Centre, 582-592 Nathan Rd., Mongkok, Kowloon, Hong Kong.</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>Copyright © 2022 paradise. All Rights Reserved.</p>
+                </div>   
             </div>
         </footer>
     </div>

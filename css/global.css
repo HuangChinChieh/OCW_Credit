@@ -2209,6 +2209,7 @@ i{
           flex-flow: row wrap;
   font-size: 0.8125rem;
   width: 100%;
+  justify-content: center;
 }
 .footer-inner .company-info .info-item {
   padding: 8px 8px;
@@ -4406,6 +4407,7 @@ i.icon-logo-hln, i.icon-casinoworld-logo-hln {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+            
   }
   .footer-inner .company-info .info-item {
     padding: 8px 12px;
