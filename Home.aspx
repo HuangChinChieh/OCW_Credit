@@ -216,7 +216,10 @@
                     GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 }
 
-                c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
+                window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName).then((d) => {
+                    c.setClassText(GI, "GameCode", null, d);
+                });
+            
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 idMyGameItemGroup.appendChild(GI);
             }
@@ -242,7 +245,10 @@
                     GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 }
 
-                c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
+                window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName).then((d) => {
+                    c.setClassText(GI, "GameCode", null, d);
+                });
+
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 idFavoGameItemGroup.appendChild(GI);
             }
@@ -456,8 +462,12 @@
                     GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
                     GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 }
+               
+                window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName).then((d) => {
+                    c.setClassText(GI, "GameCode", null, d);
+                });
 
-                c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
+             
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 document.getElementById('idFavoGameItemGroup').appendChild(GI);
             }

@@ -300,43 +300,29 @@
                             //if (record.GameCode.toUpperCase().includes('EWIN')) {
                             //    gameName = window.parent.API_GetGameLang(2, "", "EWin.EWinGaming") + "(eWIN)";
                             //} else {
-                                gameName = window.parent.API_GetGameLang(2, "", record.GameCode);
+                            window.parent.API_GetGameLang2(WebInfo.Lang, record.GameCode, function (langText) {
+                                var record = this;
+                                c.setClassText(RecordDom, "gameName", null, langText);
+                                RecordDom.querySelector(".gameName").setAttribute("gameLangkey", record.GameCode);
+                                RecordDom.querySelector(".gameName").classList.add("gameLangkey");
+                                if (record.RewardValue >= 0) {
+                                    RecordDom.querySelector(".rewardValue").classList.add("positive");
+                                    c.setClassText(RecordDom, "rewardValue", null, "+ " + new BigNumber(record.RewardValue).toFormat());
+                                } else {
+                                    RecordDom.querySelector(".rewardValue").classList.add("negative");
+                                    c.setClassText(RecordDom, "rewardValue", null, new BigNumber(record.RewardValue).toFormat());
+                                }
+
+                                c.setClassText(RecordDom, "orderValue", null, new BigNumber(record.OrderValue).toFormat());
+
+                                c.setClassText(RecordDom, "validBet", null, new BigNumber(record.ValidBetValue).toFormat());
+
+                                panel.appendChild(RecordDom);
+                            }.bind(record));
+                           
                             /*}*/
-                            c.setClassText(RecordDom, "gameName", null, gameName);
-                            RecordDom.querySelector(".gameName").setAttribute("gameLangkey", record.GameCode);
-                            RecordDom.querySelector(".gameName").classList.add("gameLangkey");
-                            if (record.RewardValue >= 0) {
-                                RecordDom.querySelector(".rewardValue").classList.add("positive");
-                                c.setClassText(RecordDom, "rewardValue", null, "+ " + new BigNumber(record.RewardValue).toFormat());
-                            } else {
-                                RecordDom.querySelector(".rewardValue").classList.add("negative");
-                                c.setClassText(RecordDom, "rewardValue", null, new BigNumber(record.RewardValue).toFormat());
-                            }
-                            
-                            c.setClassText(RecordDom, "orderValue", null, new BigNumber(record.OrderValue).toFormat());
-
-                            //if (record.OrderValue >= 0) {
-                            //    RecordDom.querySelector(".orderValue").classList.add("positive");
-                            //    c.setClassText(RecordDom, "orderValue", null, "+ " + new BigNumber(record.OrderValue).toFormat());
-                            //} else {
-                            //    RecordDom.querySelector(".orderValue").classList.add("negative");
-                            //    c.setClassText(RecordDom, "orderValue", null, new BigNumber(record.OrderValue).toFormat());
-                            //}
-
-                            c.setClassText(RecordDom, "validBet", null, new BigNumber(record.ValidBetValue).toFormat());
-
-                            //if (record.ValidBetValue >= 0) {
-                            //    RecordDom.querySelector(".validBet").classList.add("positive");
-                            //    c.setClassText(RecordDom, "validBet", null, "+ " + new BigNumber(record.ValidBetValue).toFormat());
-                            //} else {
-                            //    RecordDom.querySelector(".validBet").classList.add("negative");
-                            //    c.setClassText(RecordDom, "validBet", null, new BigNumber(record.ValidBetValue).toFormat());
-                            //}
-
-                            //c.setClassText(RecordDom, "rewardValue", null, new BigNumber(record.RewardValue).toFormat());
-                            //c.setClassText(RecordDom, "orderValue", null, new BigNumber(record.OrderValue).toFormat());
-                            //c.setClassText(RecordDom, "validBet", null, new BigNumber(record.ValidBetValue).toFormat());
-                            panel.appendChild(RecordDom);
+                  
+                          
                         }
 
                         if (cb) {
@@ -382,8 +368,9 @@
 
                 for (var i = 0; i < gameDoms.length; i++) {
                     var gameDom = gameDoms[i];
-                    var newGameLang = window.parent.API_GetGameLang(2, "", gameDom.getAttribute("gameLangkey"));
-                    gameDom.innerText = newGameLang;
+                    window.parent.API_GetGameLang(2, "", gameDom.getAttribute("gameLangkey")).then((d) => {
+                        gameDom.innerText = d;
+                    });
                 }
 
                 break;
