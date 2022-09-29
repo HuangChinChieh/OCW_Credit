@@ -19,7 +19,7 @@
     string isModify = "0";
     string[] stringSeparators = new string[] { "&&_" };
     string[] Separators;
-
+ 
     try {
         if (System.IO.File.Exists(Server.MapPath("/App_Data/Bulletin.txt"))) {
             FileData = System.IO.File.ReadAllText(Server.MapPath("/App_Data/Bulletin.txt"));
@@ -127,6 +127,50 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/share_pic.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/share_pic.png">
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/share_pic.png">
+    <style>
+.no-Data {
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 20px auto;
+  width: 100%;
+  min-height: 150px
+}
+
+.no-Data .data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 20px 0
+}
+
+.no-Data .data .text {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.5)
+}
+
+.no-Data .data:before {
+  content: "";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 150px;
+  background: url(../images/theme/icon/icon-nodata.svg) center center no-repeat;
+  background-size: contain;
+  text-align: center
+}
+    </style>
 </head>
 <% if (EWinWeb.IsTestSite == false) { %>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -471,19 +515,6 @@
         }
     }
 
-
-    function API_CloseGamePage() {
-        var GameIFDiv = document.querySelector(".GameHeader")
-        var IFramePage = document.getElementById("GameIFramePage");
-
-        GameIFDiv.classList.add("is-hide");
-
-        if (IFramePage) {
-            GameIFDiv.removeChild(IFramePage)
-        }
-    }
-
-
     function API_Home() {
         //Game
         API_LoadPage("Home", "Home.aspx");
@@ -624,17 +655,27 @@
     }
 
     function GameLoadPage(url, gameBrand, gameName) {
-        var IFramePage = document.getElementById("IFramePage");
-
-        if (IFramePage != null) {
-            if (IFramePage.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
+        $('#IFramePage').hide();
+        $('#iframe-container').append('<iframe id="IFrameGamePage" frameborder="0" name="page"></iframe>');
+        var IFrameGamePage = document.getElementById("IFrameGamePage");
+        if (IFrameGamePage != null) {
+            if (IFrameGamePage.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
                 API_LoadingStart();
-                IFramePage.src = url;
-                IFramePage.onload = function () {
-                    API_LoadingEnd();
+                IFrameGamePage.src = url;
+                IFrameGamePage.onload = function () {
+                    API_LoadingEnd(1);
                 }
             }
         }
+    }
+
+    function closeGame() {
+
+        SwitchGameHeader(0);
+        //$('.gameClodeBtn.btn.btn-primary.btn-sm').hide();
+
+        $('#IFrameGamePage').remove();
+        $('#IFramePage').show();
     }
 
     function showMessage(title, message, cbOK, cbCancel) {
@@ -2109,7 +2150,7 @@
                     </div>
                     <span class="GameName"></span>
                 </div>
-                <div class="gameClodeBtn btn btn-primary btn-sm" onclick="API_LoadPage('Home','Home.aspx')"><span class="language_replace">關閉遊戲</span></div>
+                <div class="gameClodeBtn btn btn-primary btn-sm" onclick="closeGame()"><span class="language_replace">關閉遊戲</span></div>
                 <div class="header-tool" style="display: none;">
                 </div>
             </div>
@@ -2321,8 +2362,10 @@
         </div>
 
         <!-- page -->
-        <div class="iframe-container">
+        <div class="iframe-container" id="iframe-container">
             <iframe id="IFramePage" frameborder="0" name="page"></iframe>
+            
+          
         </div>
         <%--        <div id="GameIFrameParentDiv" class="is-hide" style="z-index: 9999; position: absolute; top: 64px; height: calc(100vh - 64px); width: 100vw">
         </div>--%>
