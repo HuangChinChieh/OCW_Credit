@@ -19,7 +19,7 @@
     string isModify = "0";
     string[] stringSeparators = new string[] { "&&_" };
     string[] Separators;
-
+ 
     try {
         if (System.IO.File.Exists(Server.MapPath("/App_Data/Bulletin.txt"))) {
             FileData = System.IO.File.ReadAllText(Server.MapPath("/App_Data/Bulletin.txt"));
@@ -127,6 +127,50 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/share_pic.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/share_pic.png">
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/share_pic.png">
+    <style>
+.no-Data {
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 20px auto;
+  width: 100%;
+  min-height: 150px
+}
+
+.no-Data .data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 20px 0
+}
+
+.no-Data .data .text {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.5)
+}
+
+.no-Data .data:before {
+  content: "";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 150px;
+  background: url(../images/theme/icon/icon-nodata.svg) center center no-repeat;
+  background-size: contain;
+  text-align: center
+}
+    </style>
 </head>
 <% if (EWinWeb.IsTestSite == false) { %>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -141,17 +185,14 @@
 <% } %>
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="Scripts/OutSrc/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+<%--<script src="Scripts/OutSrc/lib/bootstrap/js/bootstrap.bundle.min.js"></script>--%>
 <script src="Scripts/OutSrc/js/script.js"></script>
 <script type="text/javascript" src="/Scripts/Common.js?<%:Version%>"></script>
 <script type="text/javascript" src="/Scripts/UIControl.js"></script>
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <%--<script type="text/javascript" src="<%=EWinWeb.EWinUrl %>/Scripts/jquery.min.1.7.js"></script>--%>
-<script
-    src="https://code.jquery.com/jquery-2.2.4.js"
-    integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-    crossorigin="anonymous"></script>
 <script type="text/javascript" src="/Scripts/PaymentAPI.js?<%:Version%>""></script>
 <script type="text/javascript" src="/Scripts/LobbyAPI.js?<%:Version%>""></script>
 <script type="text/javascript" src="/Scripts/GameCodeBridge.js?1"></script>
@@ -232,6 +273,10 @@
 
     function API_GetCurrency() {
         return selectedCurrency;
+    }
+
+    function API_SearchGameByGameCategory(gameCategory) {
+        return SearchControll.searchGameByGameCategory(gameCategory);
     }
 
     function API_GetGameLang(type, gameBrand, gameName) {
@@ -470,19 +515,6 @@
         }
     }
 
-
-    function API_CloseGamePage() {
-        var GameIFDiv = document.querySelector(".GameHeader")
-        var IFramePage = document.getElementById("GameIFramePage");
-
-        GameIFDiv.classList.add("is-hide");
-
-        if (IFramePage) {
-            GameIFDiv.removeChild(IFramePage)
-        }
-    }
-
-
     function API_Home() {
         //Game
         API_LoadPage("Home", "Home.aspx");
@@ -623,17 +655,27 @@
     }
 
     function GameLoadPage(url, gameBrand, gameName) {
-        var IFramePage = document.getElementById("IFramePage");
-
-        if (IFramePage != null) {
-            if (IFramePage.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
+        $('#IFramePage').hide();
+        $('#iframe-container').append('<iframe id="IFrameGamePage" frameborder="0" name="page"></iframe>');
+        var IFrameGamePage = document.getElementById("IFrameGamePage");
+        if (IFrameGamePage != null) {
+            if (IFrameGamePage.tagName.toUpperCase() == "IFRAME".toUpperCase()) {
                 API_LoadingStart();
-                IFramePage.src = url;
-                IFramePage.onload = function () {
-                    API_LoadingEnd();
+                IFrameGamePage.src = url;
+                IFrameGamePage.onload = function () {
+                    API_LoadingEnd(1);
                 }
             }
         }
+    }
+
+    function closeGame() {
+
+        SwitchGameHeader(0);
+        //$('.gameClodeBtn.btn.btn-primary.btn-sm').hide();
+
+        $('#IFrameGamePage').remove();
+        $('#IFramePage').show();
     }
 
     function showMessage(title, message, cbOK, cbCancel) {
@@ -650,6 +692,7 @@
 
             if (divMessageBox != null) {
                 messageModal.toggle();
+
 
                 if (divMessageBoxCloseButton != null) {
                     // divMessageBoxCloseButton.style.display = "inline";
@@ -774,7 +817,7 @@
                 GameInfoModal.hide();
                 modal.show();
 
-                if (divMessageBoxCloseButton != null) {
+                if (cbCancel != null && divMessageBoxCloseButton != null) {
                     // divMessageBoxCloseButton.style.display = "inline";
                     divMessageBoxCloseButton.classList.remove("is-hide");
                     divMessageBoxCloseButton.onclick = function () {
@@ -784,6 +827,8 @@
                             cbCancel();
                         }
                     }
+                } else {
+                    divMessageBoxCloseButton.classList.add("is-hide");
                 }
 
                 if (divMessageBoxOKButton != null) {
@@ -868,6 +913,7 @@
     }
 
     function openGame(gameBrand, gameName, categ) {
+
         var alertSearch = $("#alertSearch");
 
         if (alertSearch.css("display") == "block") {
@@ -930,12 +976,11 @@
 
     //FavoriteGame
     function favBtnEvent(gameBrand, gameName) {
+
+        event.stopPropagation();
         if (EWinWebInfo.UserLogined) {
             var btn = event.currentTarget;
             var gameCode = gameBrand + "." + gameName;
-
-            event.stopPropagation();
-
             if ($(btn).hasClass("add")) {
                 $(btn).removeClass("add");
                 GCB.RemoveFavo(gameCode, function () {
@@ -961,10 +1006,11 @@
     };
 
     function favBtnClick(gameCode) {
+      
+        event.stopPropagation();
         if (EWinWebInfo.UserLogined) {
             var btn = event.currentTarget;
-            event.stopPropagation();
-
+       
             if ($(btn).hasClass("added")) {
                 $(btn).removeClass("added");
                 GCB.RemoveFavo(gameCode, function () {
@@ -977,6 +1023,11 @@
                 });
             }
         } else {
+            var alertSearch = $("#alertSearch");
+
+            if (alertSearch.css("display") == "block") {
+                alertSearchCloseButton.click();
+            }
             var closebtn = $('#alertGameIntroCloseBtn');
             if (closebtn.length > 0) {
                 closebtn.trigger('click');
@@ -1866,6 +1917,33 @@
 
         }
 
+        this.searchGameByGameCategory = function (gameCategoryName) {
+            //待修正
+            let o;
+
+            SearchDom.modal('show');
+            SearchDom.find("#div_SearchGameCategory").show();
+            SearchDom.find("input[name='button-brandExchange']").each(function (e, v) {
+                $(v).prop("checked", false);
+            });
+
+            SearchDom.find("#seleGameCategory").empty();
+            o = new Option(mlp.getLanguageKey("全部"), "All");
+            SearchDom.find("#seleGameCategory").append(o);
+            SearchDom.find("#seleGameCategory").val("All");
+
+            if (gameCategoryName) {
+                o = new Option(mlp.getLanguageKey(gameCategoryName), gameCategoryName);
+                SearchDom.find("#seleGameCategory").append(o);
+                SearchDom.find("#seleGameCategory").val(gameCategoryName);
+            }
+
+            SearchDom.find('#alertSearchKeyWord').val('');
+
+            SearchSelf.searchGameList();
+
+        }
+
         //openFullSearch
         this.openFullSearch = function (e) {
             var header_SearchFull = document.getElementById("header_SearchFull");
@@ -2072,7 +2150,7 @@
                     </div>
                     <span class="GameName"></span>
                 </div>
-                <div class="gameClodeBtn btn btn-primary btn-sm" onclick="API_LoadPage('Home','Home.aspx')"><span class="language_replace">關閉遊戲</span></div>
+                <div class="gameClodeBtn btn btn-primary btn-sm" onclick="closeGame()"><span class="language_replace">關閉遊戲</span></div>
                 <div class="header-tool" style="display: none;">
                 </div>
             </div>
@@ -2284,8 +2362,10 @@
         </div>
 
         <!-- page -->
-        <div class="iframe-container">
+        <div class="iframe-container" id="iframe-container">
             <iframe id="IFramePage" frameborder="0" name="page"></iframe>
+            
+          
         </div>
         <%--        <div id="GameIFrameParentDiv" class="is-hide" style="z-index: 9999; position: absolute; top: 64px; height: calc(100vh - 64px); width: 100vw">
         </div>--%>
@@ -2294,76 +2374,193 @@
     <div id="footer" class="is-hide">
         <footer class="footer-container">
             <div class="footer-inner">
-                <div class="partner">
-                    <div class="logo">
-                        <div class="row">
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-PG.png" alt="">
+                <div class="container">
+                    <ul class="company-info">
+                        <li class="info-item ">
+                            <a onclick="window.parent.API_LoadPage('About','About.html')"><span class="language_replace">關於我們</span></a>
+                        </li>
+                        <!-- <li class="info-item ">
+                            <a onclick="location.href='https://game.ewin-soft.com/GetDownloadLink.aspx?Tag=X07TATY8';"><span class="language_replace">下載代理工具</span></a>
+                        </li> -->
+                        <!--li class="info-item">
+                            <a onclick="window.parent.API_ShowContactUs()"><span class="language_replace">聯絡客服</span></a>
+                        </li>
+                        <li class="info-item ">
+                            <a onclick="window.parent.API_ShowPartialHtml('', 'Rules', true, null)"><span class="language_replace">利用規約</span></a>
+                        </li>
+                        <li class="info-item ">
+                            <a onclick="window.parent.API_ShowPartialHtml('', 'PrivacyPolicy', true, null)"><span class="language_replace">隱私權政策</span></a>
+                        </li>
+                        <li class="info-item ">
+                            <a onclick="window.parent.API_OpenHotArticle()"><span class="language_replace">熱門文章</span></a>
+                        </li-->
+                    </ul>
+                    <%--<div class="partner">
+                        <div class="logo">
+                            <div class="row">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-PG.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-CG.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-CG.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-PP.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-PP.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-BG.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-BG.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-VA.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-VA.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-BNG.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-BNG.png" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="logo-item">
-                                <div class="img-crop">
-                                    <img src="images/logo/logo-pagcor.png" alt="">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="images/logo/logo-pagcor.png" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div> 
+                    --%>
+                    <div class="partner">
+                        <div class="logo">
+                            <div class="row">
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-eWIN.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-play.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-evo.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-cg.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-bco.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-cq9.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-red-tiger.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-microgaming.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-playngo.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-h.png" alt="">
+                                    </div>
+                                </div>
+                                
+                                
+                                <%--
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-kgs.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-bbin.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-gmw.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-pg.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-netent.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-kx.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-evops.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-bti.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-zeus.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-biggaming.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="logo-item">
+                                    <div class="img-crop">
+                                        <img src="/images/logo/footer/logo-va.png" alt="">
+                                    </div>
+                                </div>
+                                --%>
+
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <ul class="company-info">
-                    <li class="info-item ">
-                        <a onclick="window.parent.API_LoadPage('About','About.html')"><span class="language_replace">關於我們</span></a>
-                    </li>
-					<!-- <li class="info-item ">
-                        <a onclick="location.href='https://game.ewin-soft.com/GetDownloadLink.aspx?Tag=X07TATY8';"><span class="language_replace">下載代理工具</span></a>
-                    </li> -->
-                    <!--li class="info-item">
-                        <a onclick="window.parent.API_ShowContactUs()"><span class="language_replace">聯絡客服</span></a>
-                    </li>
-                    <li class="info-item ">
-                        <a onclick="window.parent.API_ShowPartialHtml('', 'Rules', true, null)"><span class="language_replace">利用規約</span></a>
-                    </li>
-                    <li class="info-item ">
-                        <a onclick="window.parent.API_ShowPartialHtml('', 'PrivacyPolicy', true, null)"><span class="language_replace">隱私權政策</span></a>
-                    </li>
-                    <li class="info-item ">
-                        <a onclick="window.parent.API_OpenHotArticle()"><span class="language_replace">熱門文章</span></a>
-                    </li-->
-
-
-                </ul>
+                </div>   
                 <div class="company-address">
                     <p class="name">The Orange Crest Limited</p>
                     <p class="address">Sino Centre, 582-592 Nathan Rd., Mongkok, Kowloon, Hong Kong.</p>
                 </div>
                 <div class="footer-copyright">
                     <p>Copyright © 2022 paradise. All Rights Reserved.</p>
-                </div>
+                </div>   
             </div>
         </footer>
     </div>

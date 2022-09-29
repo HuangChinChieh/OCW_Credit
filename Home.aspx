@@ -192,7 +192,10 @@
     function tempInit() {
         var favoriteGames = [];
         var playedGames = [];
-
+        var idFavoGameItemGroup = document.getElementById('idFavoGameItemGroup');
+        var idMyGameItemGroup = document.getElementById('idMyGameItemGroup');
+        idFavoGameItemGroup.innerHTML = "";
+        idMyGameItemGroup.innerHTML = "";
         GCB.GetPlayed(function (data) {
             playedGames.push(data);
         }, function (data) {
@@ -215,7 +218,7 @@
 
                 c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                document.getElementById('idMyGameItemGroup').appendChild(GI);
+                idMyGameItemGroup.appendChild(GI);
             }
         });
 
@@ -241,7 +244,7 @@
 
                 c.setClassText(GI, "GameCode", null, window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName));
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
-                document.getElementById('idFavoGameItemGroup').appendChild(GI);
+                idFavoGameItemGroup.appendChild(GI);
             }
         });
 
@@ -263,7 +266,7 @@
         tempGI = document.getElementById("idRecommend" + (index + 1));
         tempGI_img = tempGI.querySelector("img");
         tempGI_a = tempGI.querySelector("a");
-        debugger
+
         if (tempGI_img != null) {
             tempGI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + temp_gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + temp_gameItem.GameName + ".png";
             tempGI_img.onerror = new Function("setDefaultIcon('" + temp_gameItem.GameBrand + "', '" + temp_gameItem.GameName + "')");
@@ -1528,7 +1531,7 @@
         </main>
         <!-- footer -->
         <!-- 合作夥伴 -->
-        <section class="partner">
+        <section class="partner" style="display: none;">
             <!-- <div class="container-fluid"> -->
             <div class="page-content">
                 <div class="sec-title-container">

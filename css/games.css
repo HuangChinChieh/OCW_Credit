@@ -2083,3 +2083,13 @@
     transform: translateX(-100%);
   }
 }
+
+.wrapper-btnmore{
+  margin-top: 2.5rem;
+}
+
+.wrapper-btnmore .btn{
+  max-width: 360px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

@@ -304,7 +304,7 @@
                         <div class="form-group col-3">
                             <label class="form-title language_replace">國碼</label>
                             <div class="input-group">
-                                <input name="PhonePrefix" id="idPhonePrefix" type="text" class="form-control custom-style" placeholder="+82" inputmode="decimal" value="+82">
+                                <input name="PhonePrefix" id="idPhonePrefix" type="text" class="form-control custom-style" placeholder="+81" inputmode="decimal" value="+81">
                                 <div class="invalid-feedback language_replace">請輸入國碼</div>
                             </div>
                         </div>

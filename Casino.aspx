@@ -27,8 +27,8 @@
 <script type="text/javascript" src="/Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
-<script src="Scripts/OutSrc/lib/jquery/jquery.min.js"></script>
-<script src="Scripts/OutSrc/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
 <script src="Scripts/OutSrc/lib/swiper/js/swiper-bundle.min.js"></script>
 <%--<script src="Scripts/OutSrc/js/games.js"></script>--%>
 
@@ -105,6 +105,8 @@
                 idNoGameExist.classList.add("is-hide");
             }
         });
+        var doc = document.getElementById("searchGameByCategory");
+        doc.onclick = new Function("window.parent.API_SearchGameByGameCategory('" + categoryCode + "')");
     }
 
     function updateGameCode() {
@@ -150,7 +152,6 @@
         }, () => {
             selGameCategory(nowCateg);
         })
-
     }
 
     function init() {
@@ -305,6 +306,13 @@
             <section class="section-wrap game-list">
                 <div class="page-content">
                     <div id="idGameItemGroup" class="game-item-group">
+                    </div>
+                    <!-- <button type="button" class="btn btn btn-outline-main btn-sm btn-reset-popup" onclick="">
+                        <span class="language_replace">もっと見る</span>
+                    </button> -->
+                    <div class="wrapper_center wrapper-btnmore">
+                        <button class="btn btn btn-outline-main" type="button" id="searchGameByCategory"><span class="language_replace">查看更多</span>
+                        </button>
                     </div>
                     <div id="idNoGameExist" class="is-hide">
                         <span class="language_replace">搜尋不到相關遊戲，請重設分類與廠牌</span>
