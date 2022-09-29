@@ -295,13 +295,11 @@
                     if (o.DetailList.length > 0) {                       
                         for (var i = 0; i < o.DetailList.length; i++) {
                             var record = o.DetailList[i];
-                            var RecordDom = c.getTemplate("temRecordDetailItem");
-                            var gameName = '';
-                            //if (record.GameCode.toUpperCase().includes('EWIN')) {
-                            //    gameName = window.parent.API_GetGameLang(2, "", "EWin.EWinGaming") + "(eWIN)";
-                            //} else {
+           
                             window.parent.API_GetGameLang2(WebInfo.Lang, record.GameCode, function (langText) {
                                 var record = this;
+                                var RecordDom = c.getTemplate("temRecordDetailItem");
+
                                 c.setClassText(RecordDom, "gameName", null, langText);
                                 RecordDom.querySelector(".gameName").setAttribute("gameLangkey", record.GameCode);
                                 RecordDom.querySelector(".gameName").classList.add("gameLangkey");
