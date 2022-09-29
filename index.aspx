@@ -426,11 +426,11 @@
         GCB.GetByGameCode(gameBrand + "." + gameName, (gameItem) => {
             var rtpInfoJson = gameItem.RTPInfo;
             var categ = gameItem.GameCategoryCode;
-
+            var langText= gameItem.Language.find(x => x.LanguageCode == lang) ? gameItem.Language.find(x => x.LanguageCode == lang).DisplayText : "";
             var divMessageBox = document.getElementById("alertGameIntro");
 
             if (divMessageBox != null) {
-                divMessageBox.querySelector(".gameRealName").innerText = API_GetGameLang(1, gameBrand, gameName);
+                divMessageBox.querySelector(".gameRealName").innerText = langText;
                 divMessageBox.querySelector(".GameID").innerText = c.padLeft(gameItem.GameID.toString(), 5);
                 divMessageBox.querySelector(".GameImg").src = EWinWebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameBrand + "/PC/" + EWinWebInfo.Lang + "/" + gameName + ".png";
                 divMessageBox.querySelector(".GameImg").onerror = new Function("setDefaultIcon('" + gameBrand + "', '" + gameName + "')");
