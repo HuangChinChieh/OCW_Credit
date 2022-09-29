@@ -426,7 +426,7 @@
         GCB.GetByGameCode(gameBrand + "." + gameName, (gameItem) => {
             var rtpInfoJson = gameItem.RTPInfo;
             var categ = gameItem.GameCategoryCode;
-            var langText= gameItem.Language.find(x => x.LanguageCode == lang) ? gameItem.Language.find(x => x.LanguageCode == lang).DisplayText : "";
+            var langText= gameItem.Language.find(x => x.LanguageCode == EWinWebInfo.Lang) ? gameItem.Language.find(x => x.LanguageCode == EWinWebInfo.Lang).DisplayText : "";
             var divMessageBox = document.getElementById("alertGameIntro");
 
             if (divMessageBox != null) {
