@@ -239,16 +239,14 @@
                 var GI = c.getTemplate("idMyGameItem");
                 var GI_img = GI.querySelector("img");
                 var GI_a = GI.querySelector(".OpenGame");
+                var langText = gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang) ? gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang).DisplayText : "";
 
                 if (GI_img != null) {
                     GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
                     GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 }
-
-                window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName).then((d) => {
-                    c.setClassText(GI, "GameCode", null, d);
-                });
-
+                
+                c.setClassText(GI, "GameCode", null, langText);
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 idFavoGameItemGroup.appendChild(GI);
             }
@@ -457,17 +455,14 @@
                 var GI = c.getTemplate("idMyGameItem");
                 var GI_img = GI.querySelector("img");
                 var GI_a = GI.querySelector(".OpenGame");
-
+                var langText = gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang) ? gameItem.Language.find(x => x.LanguageCode == WebInfo.Lang).DisplayText : "";
+                
                 if (GI_img != null) {
                     GI_img.src = WebInfo.EWinGameUrl + "/Files/GamePlatformPic/" + gameItem.GameBrand + "/PC/" + WebInfo.Lang + "/" + gameItem.GameName + ".png";
                     GI_img.onerror = new Function("setDefaultIcon('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 }
-               
-                window.parent.API_GetGameLang(1, gameItem.GameBrand, gameItem.GameName).then((d) => {
-                    c.setClassText(GI, "GameCode", null, d);
-                });
 
-             
+                c.setClassText(GI, "GameCode", null, langText);
                 GI_a.onclick = new Function("window.parent.API_OpenGameCode('" + gameItem.GameBrand + "', '" + gameItem.GameName + "')");
                 document.getElementById('idFavoGameItemGroup').appendChild(GI);
             }
