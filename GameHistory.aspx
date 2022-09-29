@@ -297,11 +297,13 @@
                             var record = o.DetailList[i];
                             var RecordDom = c.getTemplate("temRecordDetailItem");
                             var gameName = '';
-                            //if (record.GameCode.toUpperCase().includes('EWIN')) {
-                            //    gameName = window.parent.API_GetGameLang(2, "", "EWin.EWinGaming") + "(eWIN)";
-                            //} else {
+
+                            if (record.GameCode.toUpperCase().includes('EWIN')) {
+                                record.GameCode = "EWin.EWinGaming";
+                            }
                             window.parent.API_GetGameLang2(WebInfo.Lang, record.GameCode, function (langText) {
                                 var record = this;
+                                RecordDom = c.getTemplate("temRecordDetailItem");
                                 c.setClassText(RecordDom, "gameName", null, langText);
                                 RecordDom.querySelector(".gameName").setAttribute("gameLangkey", record.GameCode);
                                 RecordDom.querySelector(".gameName").classList.add("gameLangkey");
@@ -319,10 +321,6 @@
 
                                 panel.appendChild(RecordDom);
                             }.bind(record));
-                           
-                            /*}*/
-                  
-                          
                         }
 
                         if (cb) {
