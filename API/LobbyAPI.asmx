@@ -53,12 +53,11 @@ public class LobbyAPI : System.Web.Services.WebService {
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public EWin.CASINO.APIResult CheckUserAccountByPhoneNumberAndLoginAccount(string GUID, string LoginAccount, string PhonePrefix, string PhoneNumber)
+    public CASINO3651API.CASINO3651.APIResult CheckUserAccountByPhoneNumberAndLoginAccount(string GUID, string LoginAccount, string PhonePrefix, string PhoneNumber)
     {
-        EWin.CASINO.CASINO3651 casino3651 = new EWin.CASINO.CASINO3651();
+        CASINO3651API.CASINO3651.CASINO3651 casino3651 = new CASINO3651API.CASINO3651.CASINO3651();
         TelPhoneNormalize TN = new TelPhoneNormalize(PhonePrefix, PhoneNumber);
         return casino3651.CheckUserAccountByPhoneNumberAndLoginAccount(GetToken(), GUID, TN.PhonePrefix, TN.PhoneNumber, LoginAccount);
-
     }
 
     [WebMethod]

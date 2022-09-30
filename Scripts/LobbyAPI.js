@@ -342,7 +342,7 @@
     };
 
     this.CheckUserAccountByPhoneNumberAndLoginAccount = function (GUID, LoginAccount, PhonePrefix, PhoneNumber, cb) {
-        var url = APIUrl + "/CheckUserAccountByPhoneNumberAndLoginAccount";
+        var url = APIUrl+ "/CheckUserAccountByPhoneNumberAndLoginAccount";
         var postData;
 
         postData = {

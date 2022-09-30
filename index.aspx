@@ -443,6 +443,7 @@
     }
 
     function API_LoadingEnd(type) {
+    
         var footerDom = c.getTemplate("footer");
         if (document.getElementById("IFramePage").contentDocument) {
             if (type && type == 1) {
@@ -2415,64 +2416,7 @@
                         <li class="info-item ">
                             <a onclick="window.parent.API_LoadPage('About','About.html')"><span class="language_replace">關於我們</span></a>
                         </li>
-                        <!-- <li class="info-item ">
-                            <a onclick="location.href='https://game.ewin-soft.com/GetDownloadLink.aspx?Tag=X07TATY8';"><span class="language_replace">下載代理工具</span></a>
-                        </li> -->
-                        <!--li class="info-item">
-                            <a onclick="window.parent.API_ShowContactUs()"><span class="language_replace">聯絡客服</span></a>
-                        </li>
-                        <li class="info-item ">
-                            <a onclick="window.parent.API_ShowPartialHtml('', 'Rules', true, null)"><span class="language_replace">利用規約</span></a>
-                        </li>
-                        <li class="info-item ">
-                            <a onclick="window.parent.API_ShowPartialHtml('', 'PrivacyPolicy', true, null)"><span class="language_replace">隱私權政策</span></a>
-                        </li>
-                        <li class="info-item ">
-                            <a onclick="window.parent.API_OpenHotArticle()"><span class="language_replace">熱門文章</span></a>
-                        </li-->
                     </ul>
-                    <%--<div class="partner">
-                        <div class="logo">
-                            <div class="row">
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="images/logo/logo-PG.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="images/logo/logo-CG.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="images/logo/logo-PP.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="images/logo/logo-BG.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="images/logo/logo-VA.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="images/logo/logo-BNG.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="images/logo/logo-pagcor.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    --%>
                     <div class="partner">
                         <div class="logo">
                             <div class="row">
@@ -2526,66 +2470,6 @@
                                         <img src="/images/logo/footer/logo-h.png" alt="">
                                     </div>
                                 </div>
-                                
-                                
-                                <%--
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-kgs.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-bbin.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-gmw.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-pg.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-netent.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-kx.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-evops.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-bti.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-zeus.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-biggaming.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="logo-item">
-                                    <div class="img-crop">
-                                        <img src="/images/logo/footer/logo-va.png" alt="">
-                                    </div>
-                                </div>
-                                --%>
-
                             </div>
                         </div>
                     </div>
